@@ -29,9 +29,7 @@ const App: Component = () => {
 			setCurrentPage('list');
 			setSelectedMonitorId(null);
 			const page = route.page || 1;
-			if (page !== currentPageNum()) {
-				setCurrentPageNum(page);
-			}
+			setCurrentPageNum(page);
 		}
 	};
 
@@ -47,7 +45,6 @@ const App: Component = () => {
 	const handlePageChange = (page: number) => {
 		if (page >= 1 && page <= monitorsData.totalPages()) {
 			navigateToList(page);
-			setCurrentPageNum(page);
 			handleRouteChange();
 			window.scrollTo({ top: 0, behavior: 'smooth' });
 		}
@@ -72,37 +69,7 @@ const App: Component = () => {
 				loading={monitorsData.loading() || detailLoading()}
 			/>
 			<main class="relative max-w-[var(--page-width)] w-full md:px-4 mx-auto mt-[1rem] pb-8">
-				<Show
-					when={currentPage() === 'detail' && selectedMonitorId() !== null}
-					fallback={
-						<Show
-							when={!monitorsData.loading() && !monitorsData.error()}
-							fallback={
-								<Show
-									when={monitorsData.loading()}
-									fallback={<ErrorState onRetry={() => monitorsData.refresh()} />}
-								>
-									<LoadingState />
-								</Show>
-							}
-						>
-							<StatusOverview monitors={monitorsData.monitors()} />
-							<MonitorList
-								monitors={monitorsData.monitors()}
-								onMonitorClick={(monitor) => {
-									navigateToDetail(monitor.id);
-									handleRouteChange();
-								}}
-							/>
-							<Pagination
-								currentPage={currentPageNum()}
-								totalPages={monitorsData.totalPages()}
-								loading={monitorsData.loading()}
-								onPageChange={handlePageChange}
-							/>
-						</Show>
-					}
-				>
+				{currentPage() === 'detail' && selectedMonitorId() !== null ? (
 					<MonitorDetail
 						statuspageId={STATUSPAGE_ID}
 						monitorId={selectedMonitorId()!}
@@ -110,7 +77,28 @@ const App: Component = () => {
 						refreshTrigger={detailRefreshTrigger()}
 						onLoadingChange={setDetailLoading}
 					/>
-				</Show>
+				) : monitorsData.loading() ? (
+					<LoadingState />
+				) : monitorsData.error() ? (
+					<ErrorState onRetry={() => monitorsData.refresh()} />
+				) : (
+					<>
+						<StatusOverview monitors={monitorsData.monitors()} />
+						<MonitorList
+							monitors={monitorsData.monitors()}
+							onMonitorClick={(monitor) => {
+								navigateToDetail(monitor.id);
+								handleRouteChange();
+							}}
+						/>
+						<Pagination
+							currentPage={currentPageNum()}
+							totalPages={monitorsData.totalPages()}
+							loading={monitorsData.loading()}
+							onPageChange={handlePageChange}
+						/>
+					</>
+				)}
 			</main>
 		</div>
 	);

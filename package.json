@@ -1,7 +1,7 @@
 {
 	"name": "tokee",
 	"version": "1.9.3",
-	"description": "A beautiful, modern third-party status page for UptimeRobot",
+	"description": "A beautiful, modern third-party status page for UptimeRobot.",
 	"license": "MIT",
 	"author": "yamrc <yamrci@outlook.com>",
 	"type": "module",

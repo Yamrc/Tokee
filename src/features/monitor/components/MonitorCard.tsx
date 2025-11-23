@@ -13,10 +13,20 @@ const MonitorCard: Component<MonitorCardProps> = (props) => {
 	const { monitor } = props;
 	const status = getStatus(monitor.status);
 
+	const handleKeyDown = (e: KeyboardEvent & { currentTarget: HTMLElement; target: Element }) => {
+		if ((e.key === 'Enter' || e.key === ' ') && props.onClick) {
+			e.preventDefault();
+			props.onClick();
+		}
+	};
+
 	return (
 		<article
 			class="card-base card-shadow p-6 cursor-pointer transition-colors hover:bg-[var(--btn-card-bg-hover)] [&:hover_h3]:text-[var(--primary)]!"
 			onClick={props.onClick}
+			onKeyDown={handleKeyDown}
+			tabIndex={props.onClick ? 0 : undefined}
+			aria-label={props.onClick ? `查看 ${monitor.name} 的详细信息` : undefined}
 		>
 			<div class="flex items-center gap-3 mb-4">
 				<h3 class="text-90 text-lg font-semibold transition-colors duration-200 flex-1 min-w-0 truncate">{monitor.name}</h3>
@@ -35,9 +45,10 @@ const MonitorCard: Component<MonitorCardProps> = (props) => {
 							rel="noopener noreferrer"
 							class="btn-card w-8 h-8 rounded-md flex-shrink-0"
 							onClick={(e) => e.stopPropagation()}
-							title="访问站点"
+							onKeyDown={(e) => e.stopPropagation()}
+							aria-label={`访问 ${monitor.name} 的网站`}
 						>
-							<Icon icon="material-symbols:open-in-new" width="1rem" height="1rem" />
+							<Icon icon="material-symbols:open-in-new" width="1rem" height="1rem" aria-hidden="true" />
 						</a>
 					</Show>
 				</div>
@@ -51,9 +62,11 @@ const MonitorCard: Component<MonitorCardProps> = (props) => {
 							const height = Math.max(ratio, 4);
 							return (
 								<div
-									class={`flex-1 rounded-t transition-colors ${getBarColor(ratio)} opacity-80 hover:opacity-100 cursor-pointer transition-opacity duration-100 cursor-pointer`}
+									class={`flex-1 rounded-t transition-colors transition-opacity duration-100 ${getBarColor(ratio)} opacity-80 hover:opacity-100 cursor-pointer`}
 									style={{ height: `${height}%` }}
 									title={`${day.date}: ${day.ratio}%`}
+									role="img"
+									aria-label={`${day.date}: ${day.ratio}% 可用性`}
 								/>
 							);
 						}}

@@ -8,7 +8,7 @@ interface MonitorListProps {
 }
 
 const MonitorList: Component<MonitorListProps> = (props) => (
-	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+	<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" aria-label="监控列表">
 		<For each={props.monitors}>
 			{(monitor) => (
 				<MonitorCard
@@ -17,7 +17,7 @@ const MonitorList: Component<MonitorListProps> = (props) => (
 				/>
 			)}
 		</For>
-	</div>
+	</section>
 );
 
 export default MonitorList;
