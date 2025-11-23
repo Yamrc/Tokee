@@ -10,7 +10,7 @@
 
 ## 配置
 
-在 `src/App.tsx` 中修改 `STATUSPAGE_ID` 为你的 UptimeRobot Status Page ID：
+在 `src/config.ts` 中修改 `STATUSPAGE_ID` 为你的 UptimeRobot Status Page ID：
 
 ```typescript
 const STATUSPAGE_ID = 'your-statuspage-id';
