@@ -29,6 +29,9 @@
     --status-error: oklch(.65 .20 25);
     --status-warning: oklch(.70 .14 60);
     
+    --status-success-badge: var(--status-success);
+    --status-error-badge: var(--status-error);
+    --status-warning-badge: var(--status-warning);
 
     --line-divider: oklch(.50 .01 var(--hue));
 
