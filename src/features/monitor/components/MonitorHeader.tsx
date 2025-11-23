@@ -28,32 +28,35 @@ const MonitorHeader: Component<MonitorHeaderProps> = (props) => {
 						</div>
 					</div>
 					<div class="flex flex-wrap items-center gap-x-6 gap-y-2 text-75 text-sm">
-						<span class="flex items-center gap-1.5">
-							<Icon icon="material-symbols:category" width="1rem" height="1rem" />
+						<div class="flex items-center gap-1.5">
+							<Icon icon="material-symbols:category" width="1rem" height="1rem" aria-hidden="true" />
 							<span>类型:</span>
 							<span class="text-90 font-medium">{props.monitor.type}</span>
-						</span>
-						<span class="flex items-center gap-1.5">
-							<Icon icon="material-symbols:schedule" width="1rem" height="1rem" />
+						</div>
+						<div class="flex items-center gap-1.5">
+							<Icon icon="material-symbols:schedule" width="1rem" height="1rem" aria-hidden="true" />
 							<span>检查间隔:</span>
 							<span class="text-90 font-medium">{props.monitor.checkInterval}</span>
-						</span>
+						</div>
 						{props.monitor.url && (
-							<a
-								href={props.monitor.url}
-								target="_blank"
-								rel="noopener noreferrer"
-								class="text-[var(--primary)] hover:underline flex items-center gap-1.5"
-							>
-								<Icon icon="material-symbols:open-in-new" width="1rem" height="1rem" />
-								<span>访问站点</span>
-							</a>
+							<div class="flex items-center gap-1.5">
+								<a
+									href={props.monitor.url}
+									target="_blank"
+									rel="noopener noreferrer"
+									class="text-[var(--primary)] hover:underline flex items-center gap-1.5"
+									aria-label={`访问 ${props.monitor.name} 的网站`}
+								>
+									<Icon icon="material-symbols:open-in-new" width="1rem" height="1rem" aria-hidden="true" />
+									<span>访问站点</span>
+								</a>
+							</div>
 						)}
 					</div>
 					<div class="mt-4 pt-4 relative">
 						<div class="absolute top-0 left-0 right-0 h-px bg-[var(--line-divider)] opacity-20" />
 						<div class="flex items-center gap-2 mb-3">
-							<Icon icon="material-symbols:bar-chart" width="1rem" height="1rem" class="text-75" />
+							<Icon icon="material-symbols:bar-chart" width="1rem" height="1rem" class="text-75" aria-hidden="true" />
 							<span class="text-75 text-xs font-medium">
 								{isMobile() ? '30天运行时间趋势' : '90天运行时间趋势'}
 							</span>
@@ -66,9 +69,11 @@ const MonitorHeader: Component<MonitorHeaderProps> = (props) => {
 										const height = Math.max(ratio, 4);
 										return (
 											<div
-												class={`flex-1 rounded-t transition-colors ${getBarColor(ratio)} opacity-80 hover:opacity-100 transition-opacity duration-100 cursor-pointer`}
+												class={`flex-1 rounded-t transition-colors transition-opacity duration-100 ${getBarColor(ratio)} opacity-80 hover:opacity-100 cursor-pointer`}
 												style={{ height: `${height}%` }}
 												title={`${day.date}: ${day.ratio}%`}
+												role="img"
+												aria-label={`${day.date}: ${day.ratio}% 可用性`}
 											/>
 										);
 									}}

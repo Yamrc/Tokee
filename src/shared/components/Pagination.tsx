@@ -21,15 +21,16 @@ const Pagination: Component<PaginationProps> = (props) => {
 	};
 
 	return (
-		<div class="flex items-center justify-center gap-2 mt-6">
+		<nav class="flex items-center justify-center gap-2 mt-6" aria-label="分页导航">
 			<button
 				class="btn-regular px-3 py-2 rounded-md text-sm transition active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
 				onClick={() => props.onPageChange(props.currentPage - 1)}
 				disabled={props.currentPage === 1 || props.loading}
+				aria-label="上一页"
 			>
-				<Icon icon="material-symbols:chevron-left" width="1.25rem" height="1.25rem" />
+				<Icon icon="material-symbols:chevron-left" width="1.25rem" height="1.25rem" aria-hidden="true" />
 			</button>
-			<div class="flex items-center gap-1">
+			<div class="flex items-center gap-1" role="list">
 				<For each={getPageNumbers()}>
 					{(pageNum) => (
 						<button
@@ -40,6 +41,8 @@ const Pagination: Component<PaginationProps> = (props) => {
 							}`}
 							onClick={() => props.onPageChange(pageNum)}
 							disabled={props.loading}
+							aria-label={`第 ${pageNum} 页`}
+							aria-current={pageNum === props.currentPage ? 'page' : undefined}
 						>
 							{pageNum}
 						</button>
@@ -50,10 +53,11 @@ const Pagination: Component<PaginationProps> = (props) => {
 				class="btn-regular px-3 py-2 rounded-md text-sm transition active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
 				onClick={() => props.onPageChange(props.currentPage + 1)}
 				disabled={props.currentPage === props.totalPages || props.loading}
+				aria-label="下一页"
 			>
-				<Icon icon="material-symbols:chevron-right" width="1.25rem" height="1.25rem" />
+				<Icon icon="material-symbols:chevron-right" width="1.25rem" height="1.25rem" aria-hidden="true" />
 			</button>
-		</div>
+		</nav>
 	);
 };
 

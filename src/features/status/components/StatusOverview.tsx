@@ -17,7 +17,7 @@ const StatusOverview: Component<StatusOverviewProps> = (props) => {
 	});
 
 	return (
-		<div class="card-base card-shadow p-6 mb-[1rem]">
+		<section class="card-base card-shadow p-6 mb-[1rem]">
 			<h2 class="text-90 text-xl font-semibold mb-4">状态概览</h2>
 			<div class="grid grid-cols-2 md:grid-cols-5 gap-4">
 				<div class="text-center">
@@ -41,7 +41,7 @@ const StatusOverview: Component<StatusOverviewProps> = (props) => {
 					<div class="text-75 text-sm">平均可用性</div>
 				</div>
 			</div>
-		</div>
+		</section>
 	);
 };
 
