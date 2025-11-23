@@ -6,6 +6,29 @@
 		<meta name="author" content="Yamrc" />
 		<meta name="robots" content="index, follow" />
 		<title>Tokee</title>
+		<script>
+			const LIGHT_MODE = 'light';
+			const DARK_MODE = 'dark';
+			const AUTO_MODE = 'auto';
+			const DEFAULT_THEME = AUTO_MODE;
+			
+			const theme = localStorage.getItem('theme') || DEFAULT_THEME;
+			switch (theme) {
+				case LIGHT_MODE:
+					document.documentElement.classList.remove('dark');
+					break;
+				case DARK_MODE:
+					document.documentElement.classList.add('dark');
+					break;
+				case AUTO_MODE:
+					if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+						document.documentElement.classList.add('dark');
+					} else {
+						document.documentElement.classList.remove('dark');
+					}
+					break;
+			}
+		</script>
 	</head>
 
 	<body>

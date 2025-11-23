@@ -1,5 +1,6 @@
 import { Component } from 'solid-js';
 import { Icon } from '@iconify-icon/solid';
+import DarkModeToggle from './DarkModeToggle';
 
 interface AppHeaderProps {
 	onHomeClick: () => void;
@@ -19,14 +20,16 @@ const AppHeader: Component<AppHeaderProps> = (props) => (
 					Tokee
 				</div>
 			</button>
-			<button
-				class="btn-regular inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm transition active:scale-95"
-				onClick={props.onRefresh}
-				disabled={props.loading}
-			>
-				<Icon icon="material-symbols:refresh" width="1.25rem" height="1.25rem" />
-				刷新
-			</button>
+			<div class="flex items-center gap-1">
+				<DarkModeToggle />
+				<button
+					class="btn-plain scale-animation rounded-lg h-11 px-3 inline-flex items-center gap-2 text-sm transition active:scale-90 text-90"
+					onClick={props.onRefresh}
+					disabled={props.loading}
+				>
+					<Icon icon="material-symbols:refresh" width="1.25rem" height="1.25rem" />
+				</button>
+			</div>
 		</div>
 	</header>
 );

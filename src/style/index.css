@@ -43,6 +43,8 @@
     --scrollbar-bg: var(--scrollbar-bg-light);
     --scrollbar-bg-hover: var(--scrollbar-bg-hover-light);
     --scrollbar-bg-active: var(--scrollbar-bg-active-light);
+
+    --float-panel-bg: white;
 }
 
 :root.dark {
@@ -71,6 +73,8 @@
     --scrollbar-bg: var(--scrollbar-bg-dark);
     --scrollbar-bg-hover: var(--scrollbar-bg-hover-dark);
     --scrollbar-bg-active: var(--scrollbar-bg-active-dark);
+
+    --float-panel-bg: oklch(.19 .015 var(--hue));
 }
 
 @layer components {
