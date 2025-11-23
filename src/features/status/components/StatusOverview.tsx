@@ -17,7 +17,7 @@ const StatusOverview: Component<StatusOverviewProps> = (props) => {
 	});
 
 	return (
-		<section class="card-base card-shadow p-6 mb-[1rem]">
+		<section class="card-base card-shadow p-6 mb-4">
 			<h2 class="text-90 text-xl font-semibold mb-4">状态概览</h2>
 			<div class="grid grid-cols-2 md:grid-cols-5 gap-4">
 				<div class="text-center">
@@ -25,15 +25,15 @@ const StatusOverview: Component<StatusOverviewProps> = (props) => {
 					<div class="text-75 text-sm">总站点数</div>
 				</div>
 				<div class="text-center">
-					<div class="text-3xl font-bold text-[var(--status-success)] mb-1">{stats().success}</div>
+					<div class="text-3xl font-bold text-(--status-success) mb-1">{stats().success}</div>
 					<div class="text-75 text-sm">正常运行</div>
 				</div>
 				<div class="text-center">
-					<div class="text-3xl font-bold text-[var(--status-error)] mb-1">{stats().down}</div>
+					<div class="text-3xl font-bold text-(--status-error) mb-1">{stats().down}</div>
 					<div class="text-75 text-sm">异常</div>
 				</div>
 				<div class="text-center">
-					<div class="text-3xl font-bold text-[var(--status-warning)] mb-1">{stats().paused}</div>
+					<div class="text-3xl font-bold text-(--status-warning) mb-1">{stats().paused}</div>
 					<div class="text-75 text-sm">已暂停</div>
 				</div>
 				<div class="text-center">

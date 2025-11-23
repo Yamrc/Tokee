@@ -22,7 +22,7 @@ const MonitorHeader: Component<MonitorHeaderProps> = (props) => {
 				<div class="flex-1 min-w-0">
 					<div class="flex items-center gap-3 mb-3">
 						<h2 class="text-90 text-2xl font-bold truncate">{props.monitor.name}</h2>
-						<div class={`flex items-center gap-1.5 px-3 py-1 rounded-md text-sm font-medium flex-shrink-0 ${status.color} ${status.bg}`}>
+						<div class={`flex items-center gap-1.5 px-3 py-1 rounded-md text-sm font-medium shrink-0 ${status.color} ${status.bg}`}>
 							<div class={`w-2 h-2 rounded-full ${status.dot}`} />
 							{status.text}
 						</div>
@@ -44,7 +44,7 @@ const MonitorHeader: Component<MonitorHeaderProps> = (props) => {
 									href={props.monitor.url}
 									target="_blank"
 									rel="noopener noreferrer"
-									class="text-[var(--primary)] hover:underline flex items-center gap-1.5"
+									class="text-(--primary) hover:underline flex items-center gap-1.5"
 									aria-label={`访问 ${props.monitor.name} 的网站`}
 								>
 									<Icon icon="material-symbols:open-in-new" width="1rem" height="1rem" aria-hidden="true" />
@@ -54,7 +54,7 @@ const MonitorHeader: Component<MonitorHeaderProps> = (props) => {
 						)}
 					</div>
 					<div class="mt-4 pt-4 relative">
-						<div class="absolute top-0 left-0 right-0 h-px bg-[var(--line-divider)] opacity-20" />
+						<div class="absolute top-0 left-0 right-0 h-px bg-(--line-divider) opacity-20" />
 						<div class="flex items-center gap-2 mb-3">
 							<Icon icon="material-symbols:bar-chart" width="1rem" height="1rem" class="text-75" aria-hidden="true" />
 							<span class="text-75 text-xs font-medium">
@@ -69,7 +69,7 @@ const MonitorHeader: Component<MonitorHeaderProps> = (props) => {
 										const height = Math.max(ratio, 4);
 										return (
 											<div
-												class={`flex-1 rounded-t transition-colors transition-opacity duration-100 ${getBarColor(ratio)} opacity-80 hover:opacity-100 cursor-pointer`}
+												class={`flex-1 rounded-t transition-colors duration-100 ${getBarColor(ratio)} opacity-80 hover:opacity-100 cursor-pointer`}
 												style={{ height: `${height}%` }}
 												title={`${day.date}: ${day.ratio}%`}
 												role="img"

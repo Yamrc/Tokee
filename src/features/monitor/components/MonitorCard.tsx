@@ -22,7 +22,7 @@ const MonitorCard: Component<MonitorCardProps> = (props) => {
 
 	return (
 		<article
-			class="card-base card-shadow p-6 cursor-pointer transition-colors hover:bg-[var(--btn-card-bg-hover)] [&:hover_h3]:text-[var(--primary)]!"
+			class="card-base card-shadow p-6 cursor-pointer transition-colors hover:bg-(--btn-card-bg-hover) [&:hover_h3]:text-(--primary)!"
 			onClick={props.onClick}
 			onKeyDown={handleKeyDown}
 			tabIndex={props.onClick ? 0 : undefined}
@@ -30,12 +30,12 @@ const MonitorCard: Component<MonitorCardProps> = (props) => {
 		>
 			<div class="flex items-center gap-3 mb-4">
 				<h3 class="text-90 text-lg font-semibold transition-colors duration-200 flex-1 min-w-0 truncate">{monitor.name}</h3>
-				<div class="flex items-center gap-2 flex-shrink-0">
+				<div class="flex items-center gap-2 shrink-0">
 					<span class={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium text-white whitespace-nowrap ${status.badge}`}>
 						<Icon icon={status.icon} width="1rem" height="1rem" />
 						{status.text}
 					</span>
-					<span class="text-75 text-xs px-2 py-1 rounded-md bg-[var(--btn-regular-bg)] whitespace-nowrap">
+					<span class="text-75 text-xs px-2 py-1 rounded-md bg-(--btn-regular-bg) whitespace-nowrap">
 						{monitor.type}
 					</span>
 					<Show when={monitor.url}>
@@ -43,7 +43,7 @@ const MonitorCard: Component<MonitorCardProps> = (props) => {
 							href={monitor.url!}
 							target="_blank"
 							rel="noopener noreferrer"
-							class="btn-card w-8 h-8 rounded-md flex-shrink-0"
+							class="btn-card w-8 h-8 rounded-md shrink-0"
 							onClick={(e) => e.stopPropagation()}
 							onKeyDown={(e) => e.stopPropagation()}
 							aria-label={`访问 ${monitor.name} 的网站`}
@@ -62,7 +62,7 @@ const MonitorCard: Component<MonitorCardProps> = (props) => {
 							const height = Math.max(ratio, 4);
 							return (
 								<div
-									class={`flex-1 rounded-t transition-colors transition-opacity duration-100 ${getBarColor(ratio)} opacity-80 hover:opacity-100 cursor-pointer`}
+									class={`flex-1 rounded-t transition-colors duration-100 ${getBarColor(ratio)} opacity-80 hover:opacity-100 cursor-pointer`}
 									style={{ height: `${height}%` }}
 									title={`${day.date}: ${day.ratio}%`}
 									role="img"

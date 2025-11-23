@@ -59,7 +59,7 @@ const App: Component = () => {
 	};
 
 	return (
-		<div class="min-h-screen bg-[var(--page-bg)]">
+		<div class="min-h-screen bg-(--page-bg)">
 			<AppHeader
 				onHomeClick={() => {
 					navigateToList(currentPageNum());
@@ -68,7 +68,7 @@ const App: Component = () => {
 				onRefresh={handleRefresh}
 				loading={monitorsData.loading() || detailLoading()}
 			/>
-			<main class="relative max-w-[var(--page-width)] w-full md:px-4 mx-auto mt-[1rem] pb-8">
+			<main class="relative max-w-(--page-width) w-full md:px-4 mx-auto mt-4 pb-8">
 				{currentPage() === 'detail' && selectedMonitorId() !== null ? (
 					<MonitorDetail
 						statuspageId={STATUSPAGE_ID}

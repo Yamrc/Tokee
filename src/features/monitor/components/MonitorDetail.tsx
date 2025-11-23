@@ -75,7 +75,7 @@ const MonitorDetail: Component<MonitorDetailProps> = (props) => {
 						</div>
 						<div class="card-base card-shadow p-5">
 							<div class="flex items-center gap-2.5 mb-4">
-								<Icon icon="material-symbols:show-chart" width="1.5rem" height="1.5rem" class="text-[var(--primary)]" aria-hidden="true" />
+								<Icon icon="material-symbols:show-chart" width="1.5rem" height="1.5rem" class="text-(--primary)" aria-hidden="true" />
 								<h3 class="text-90 text-lg font-semibold">响应时间趋势</h3>
 							</div>
 							<div class="-mx-2">

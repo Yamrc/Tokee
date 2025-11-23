@@ -36,7 +36,7 @@ const Pagination: Component<PaginationProps> = (props) => {
 						<button
 							class={`px-3 py-2 rounded-md text-sm transition active:scale-95 ${
 								pageNum === props.currentPage
-									? 'bg-[var(--primary)] text-white'
+									? 'bg-(--primary) text-white'
 									: 'btn-regular'
 							}`}
 							onClick={() => props.onPageChange(pageNum)}
