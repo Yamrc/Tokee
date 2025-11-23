@@ -9,7 +9,7 @@ import AppHeader from '@shared/components/AppHeader';
 import Pagination from '@shared/components/Pagination';
 import { parseRoute, navigateToDetail, navigateToList } from '@shared/utils/router';
 
-const STATUSPAGE_ID = 'VAtAH0mzPN';
+const STATUSPAGE_ID = 'b7Ow2LAqjd';
 
 const App: Component = () => {
 	const [currentPage, setCurrentPage] = createSignal<'list' | 'detail'>('list');
