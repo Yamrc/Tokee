@@ -1,0 +1,19 @@
+{
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.expand": true,
+    "explorer.fileNesting.patterns": {
+        "package.json": "pnpm-lock.yaml, tsconfig.json, vite.config.ts, index.html",
+        "README.md": ".gitignore",
+    },
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.defaultFormatter": "biomejs.biome",
+    "editor.codeActionsOnSave": {
+        "source.fixAll": "explicit",
+        "quickfix.biome": "always",
+        "source.organizeImports.biome": "always"
+    },
+    "cSpell.words": [
+        "Tokee"
+    ]
+}

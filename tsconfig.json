@@ -1,23 +1,33 @@
 {
-    "compilerOptions": {
-      "target": "es5",
-      "declaration": true,
-      "lib": ["dom", "dom.iterable", "esnext"],
-      "rootDir": "./src",
-      "outDir": "./dist",
-      "moduleResolution": "node",
-      "allowJs": true,
-      "skipLibCheck": true,
-      "esModuleInterop": true,
-      "allowSyntheticDefaultImports": true,
-      "strict": true,
-      "forceConsistentCasingInFileNames": true,
-      "module": "esnext",
-      "resolveJsonModule": true,
-      "isolatedModules": true,
-      "noEmit": true,
-      "jsx": "react-jsx"
-    },
-    "include": ["src"]
-  }
-  
+	"compilerOptions": {
+		"jsx": "preserve",
+		"jsxImportSource": "solid-js",
+		"target": "ESNext",
+		"allowSyntheticDefaultImports": true,
+		"declaration": true,
+		"esModuleInterop": true,
+		"isolatedModules": true,
+		"module": "ESNext",
+		"moduleResolution": "bundler",
+		"noEmit": true,
+		"strict": true,
+		"types": [
+			"vite/client"
+		],
+		"baseUrl": ".",
+		"paths": {
+			"@/*": [
+				"src/*"
+			],
+			"@features/*": [
+				"src/features/*"
+			],
+			"@shared/*": [
+				"src/shared/*"
+			],
+			"@services/*": [
+				"src/services/*"
+			]
+		}
+	}
+}

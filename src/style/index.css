@@ -1,0 +1,128 @@
+@layer theme, custom-base, custom-components, custom-utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(custom-base);
+@import "tailwindcss/utilities.css" layer(custom-utilities);
+@import "./scrollbar.css";
+
+:root {
+    --hue: 345;
+    --radius-large: 1rem;
+    --page-width: 75rem;
+
+    --primary: oklch(.7 .14 var(--hue));
+    --page-bg: oklch(.95 .01 var(--hue));
+    --card-bg: white;
+
+    --btn-content: oklch(.55 .12 var(--hue));
+    --btn-regular-bg: oklch(.95 .025 var(--hue));
+    --btn-regular-bg-hover: oklch(.9 .05 var(--hue));
+    --btn-regular-bg-active: oklch(.85 .08 var(--hue));
+    --btn-plain-bg-hover: oklch(.95 .025 var(--hue));
+    --btn-plain-bg-active: oklch(.98 .01 var(--hue));
+    --btn-card-bg-hover: oklch(.98 .005 var(--hue));
+    --btn-card-bg-active: oklch(.9 .03 var(--hue));
+
+    --text-primary: oklch(.25 .02 var(--hue));
+    --text-secondary: oklch(.45 .02 var(--hue));
+
+    --status-success: oklch(.65 .20 150);
+    --status-error: oklch(.65 .20 25);
+    --status-warning: oklch(.70 .14 60);
+    
+
+    --line-divider: oklch(.50 .01 var(--hue));
+
+    --scrollbar-bg-light: rgba(0, 0, 0, .4);
+    --scrollbar-bg-hover-light: rgba(0, 0, 0, .5);
+    --scrollbar-bg-active-light: rgba(0, 0, 0, .6);
+
+    --scrollbar-bg-dark: rgba(255, 255, 255, .4);
+    --scrollbar-bg-hover-dark: rgba(255, 255, 255, .5);
+    --scrollbar-bg-active-dark: rgba(255, 255, 255, .6);
+
+    --scrollbar-bg: var(--scrollbar-bg-light);
+    --scrollbar-bg-hover: var(--scrollbar-bg-hover-light);
+    --scrollbar-bg-active: var(--scrollbar-bg-active-light);
+}
+
+:root.dark {
+    --primary: oklch(.75 .14 var(--hue));
+    --page-bg: oklch(.16 .014 var(--hue));
+    --card-bg: oklch(.23 .015 var(--hue));
+
+    --btn-content: oklch(.75 .1 var(--hue));
+    --btn-regular-bg: oklch(.33 .035 var(--hue));
+    --btn-regular-bg-hover: oklch(.38 .04 var(--hue));
+    --btn-regular-bg-active: oklch(.43 .045 var(--hue));
+    --btn-plain-bg-hover: oklch(.30 .035 var(--hue));
+    --btn-plain-bg-active: oklch(.27 .025 var(--hue));
+    --btn-card-bg-hover: oklch(.3 .03 var(--hue));
+    --btn-card-bg-active: oklch(.35 .035 var(--hue));
+
+    --text-primary: oklch(.90 .01 var(--hue));
+    --text-secondary: oklch(.70 .01 var(--hue));
+
+    --line-divider: oklch(.50 .01 var(--hue));
+    
+    --status-success-badge: oklch(.50 .20 150);
+    --status-error-badge: oklch(.50 .20 25);
+    --status-warning-badge: oklch(.55 .14 60);
+
+    --scrollbar-bg: var(--scrollbar-bg-dark);
+    --scrollbar-bg-hover: var(--scrollbar-bg-hover-dark);
+    --scrollbar-bg-active: var(--scrollbar-bg-active-dark);
+}
+
+@layer components {
+.card-base {
+        @apply rounded-[var(--radius-large)] overflow-hidden bg-[var(--card-bg)] transition;
+    }
+
+    .card-shadow {
+        @apply drop-shadow-[0_2px_4px_rgba(0,0,0,0.05)];
+    }
+
+    .btn-card {
+        @apply transition flex items-center justify-center bg-[var(--card-bg)] 
+        hover:bg-[var(--btn-card-bg-hover)] active:bg-[var(--btn-card-bg-active)];
+    }
+
+    .btn-regular {
+        @apply transition flex items-center justify-center bg-[var(--btn-regular-bg)] 
+        hover:bg-[var(--btn-regular-bg-hover)] active:bg-[var(--btn-regular-bg-active)]
+        text-[var(--btn-content)] cursor-pointer;
+    }
+
+    .expand-animation {
+        @apply relative before:ease-out before:transition active:bg-none hover:before:bg-[var(--btn-plain-bg-hover)] active:before:bg-[var(--btn-plain-bg-active)] z-0
+        before:absolute before:rounded-[inherit] before:inset-0 before:scale-[0.85] hover:before:scale-100 before:-z-10
+    }
+
+    .btn-plain {
+        @apply transition relative flex items-center justify-center bg-none
+        text-black/75 hover:text-[var(--primary)] dark:text-white/75 dark:hover:text-[var(--primary)] cursor-pointer;
+        &:not(.scale-animation) {
+            @apply hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)];
+        }
+        &.scale-animation {
+            @apply relative before:ease-out before:transition active:bg-none hover:before:bg-[var(--btn-plain-bg-hover)] active:before:bg-[var(--btn-plain-bg-active)] z-0
+            before:absolute before:rounded-[inherit] before:inset-0 before:scale-[0.85] hover:before:scale-100 before:-z-10;
+        }
+    }
+
+    .text-90 {
+        @apply text-[var(--text-primary)];
+    }
+
+    .text-75 {
+        @apply text-[var(--text-secondary)];
+    }
+}
+
+::selection {
+    background-color: oklch(0.90 0.05 var(--hue));
+}
+
+:root.dark::selection {
+    background-color: oklch(0.40 0.08 var(--hue));
+}
