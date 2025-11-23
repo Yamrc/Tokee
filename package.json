@@ -1,95 +1,32 @@
 {
-	"name": "vigilare",
-	"version": "0.9.0",
-	"type": "module",
+	"name": "tokee",
+	"version": "1.9.3",
+	"description": "A beautiful, modern third-party status page for UptimeRobot",
 	"license": "MIT",
+	"author": "yamrc <yamrci@outlook.com>",
+	"type": "module",
 	"scripts": {
-		"build": "vite build && tsc --emitDeclarationOnly",
+		"start": "vite",
 		"dev": "vite",
-		"lint:lint-staged": "lint-staged",
-		"lint:eslint": "eslint --max-warnings 0 \"src/**/*.{js,jsx,ts,tsx}\" --fix",
-		"lint:prettier": "prettier --write --log-level warn \"src/**/*.{js,ts,json,jsx,tsx,css,less,scss,vue,html,md}\"",
-		"lint:prettierall": "prettier --write --log-level warn \".\"",
-		"lint:stylelint": "stylelint --cache --fix \"**/*.{less,postcss,css,scss}\" --cache --cache-location node_modules/.cache/stylelint/",
-		"lint": "pnpm lint:eslint && pnpm lint:prettier",
-		"preview": "vite preview",
-		"prepare": "husky"
-	},
-	"lint-staged": {
-		"*.{js,jsx,ts,tsx}": [
-			"eslint --fix",
-			"prettier --write"
-		],
-		"{!(package)*.json,*.code-snippets,.!(browserslist)*rc}": [
-			"prettier --write--parser json"
-		],
-		"package.json": [
-			"prettier --write"
-		],
-		"*.{scss,less,styl}": [
-			"prettier --write"
-		],
-		"*.md": [
-			"prettier --write"
-		]
-	},
-	"engines": {
-		"node": ">=18.12.0",
-		"pnpm": ">=9.0.2"
-	},
-	"dependencies": {
-		"antd": "^5.24.6",
-		"dayjs": "^1.11.13",
-		"react": "^18.3.1",
-		"react-dom": "^18.3.1",
-		"react-transition-group": "^4.4.5",
-		"recharts": "^2.15.2",
-		"zustand": "^5.0.3"
+		"build": "vite build",
+		"serve": "vite preview",
+		"check": "tsc --noEmit --isolatedDeclarations"
 	},
 	"devDependencies": {
-		"@babel/eslint-parser": "^7.27.0",
-		"@babel/plugin-proposal-decorators": "^7.25.9",
-		"@commitlint/cli": "^19.8.0",
-		"@commitlint/config-conventional": "^19.8.0",
-		"@iconify-json/lucide": "^1.2.35",
-		"@types/lodash-es": "^4.17.12",
-		"@types/node": "^20.17.30",
-		"@types/react": "^18.3.20",
-		"@types/react-dom": "^18.3.6",
-		"@types/react-transition-group": "^4.4.12",
-		"@typescript-eslint/eslint-plugin": "^7.18.0",
-		"@typescript-eslint/parser": "^7.18.0",
-		"@unocss/preset-attributify": "66.1.0-beta.10",
-		"@unocss/preset-icons": "66.1.0-beta.10",
-		"@unocss/preset-rem-to-px": "^0.61.9",
-		"@unocss/preset-uno": "66.1.0-beta.10",
-		"@unocss/reset": "66.1.0-beta.10",
-		"@unocss/transformer-directives": "66.1.0-beta.10",
-		"@vitejs/plugin-react": "^4.3.4",
-		"autoprefixer": "^10.4.21",
-		"eslint": "^8.57.1",
-		"eslint-config-prettier": "^9.1.0",
-		"eslint-plugin-babel": "^5.3.1",
-		"eslint-plugin-prettier": "^5.2.6",
-		"eslint-plugin-react": "^7.37.5",
-		"eslint-plugin-react-hooks": "^4.6.2",
-		"eslint-plugin-react-refresh": "^0.4.19",
-		"eslint-plugin-simple-import-sort": "^12.1.1",
-		"husky": "^9.1.7",
-		"less": "^4.3.0",
-		"lint-staged": "^15.5.0",
-		"lodash-es": "^4.17.21",
-		"prettier": "^3.5.3",
-		"stylelint": "^16.18.0",
-		"stylelint-config-recess-order": "^5.1.1",
-		"stylelint-config-standard": "^36.0.1",
-		"stylelint-less": "^3.0.1",
-		"stylelint-prettier": "^5.0.3",
-		"terser": "^5.39.0",
-		"typescript": "^5.8.3",
-		"unocss": "^0.61.9",
-		"vite": "^4.5.12",
-		"vite-plugin-compression": "^0.5.1",
-		"vite-plugin-pwa": "^0.16.7"
+		"@iconify-icon/solid": "^3.0.3",
+		"@iconify-json/material-symbols": "^1.2.47",
+		"@tailwindcss/vite": "^4.1.17",
+		"@types/node": "^24.10.1",
+		"rollup-plugin-analyzer": "^4.0.0",
+		"solid-devtools": "^0.34.3",
+		"tailwindcss": "^4.1.17",
+		"typescript": "^5.7.2",
+		"vite": "^7.1.4",
+		"vite-plugin-solid": "^2.11.8"
+	},
+	"dependencies": {
+		"apexcharts": "^5.3.6",
+		"overlayscrollbars": "^2.12.0",
+		"solid-js": "^1.9.5"
 	}
 }

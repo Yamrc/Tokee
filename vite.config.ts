@@ -1,96 +1,57 @@
-import UnoCSS from 'unocss/vite';
-import { defineConfig, loadEnv } from 'vite';
-import { VitePWA } from 'vite-plugin-pwa';
-import react from '@vitejs/plugin-react';
-import viteCompression from 'vite-plugin-compression';
-import { cwd } from 'process';
+import { UserConfig } from 'vite';
+import analyze from 'rollup-plugin-analyzer';
+import solidPlugin from 'vite-plugin-solid';
+import devtools from 'solid-devtools/vite';
+import tailwindcss from '@tailwindcss/vite';
 
-// https://vitejs.dev/config/
-export default ({ mode }: { mode: string }) =>
-	defineConfig({
-		plugins: [
-			react(),
-			// PWA
-			VitePWA({
-				registerType: 'autoUpdate',
-				workbox: {
-					clientsClaim: true,
-					skipWaiting: true,
-					cleanupOutdatedCaches: true,
-					runtimeCaching: [
-						{
-							urlPattern: /(.*?)\.(woff2|woff|ttf)/,
-							handler: 'CacheFirst',
-							options: {
-								cacheName: 'file-cache',
-							},
-						},
-						{
-							urlPattern: /(.*?)\.(webp|png|jpe?g|svg|gif|bmp|psd|tiff|tga|eps)/,
-							handler: 'CacheFirst',
-							options: {
-								cacheName: 'image-cache',
-							},
-						},
-					],
+const config: UserConfig = {
+	plugins: [devtools(), solidPlugin(), tailwindcss(), analyze({ summaryOnly: true })],
+	server: {
+		port: 7210,
+	},
+	build: {
+		target: 'esnext',
+		// apexcharts 实在是太大
+		rollupOptions: {
+			treeshake: {
+				moduleSideEffects: (id: string) => {
+					if (id.includes('.css') || id.includes('.scss') || id.includes('.less')) {
+						return true;
+					}
+					if (id.includes('solid-devtools')) {
+						return true;
+					}
+					return false;
 				},
-				manifest: {
-					name: loadEnv(mode, cwd()).VITE_SITE_NAME,
-					short_name: loadEnv(mode, cwd()).VITE_SITE_NAME,
-					description: 'Vigilare 站点监测',
-					display: 'standalone',
-					start_url: '/',
-					theme_color: '#fff',
-					background_color: '#efefef',
-					icons: [
-						{
-							src: '/favicon.ico',
-							sizes: '144x144',
-							type: 'image/png',
-						},
-					],
-				},
-			}),
-			UnoCSS(),
-			viteCompression({
-				algorithm: 'gzip',
-				ext: '.gz',
-				deleteOriginFile: false,
-			}),
-		],
-		resolve: {
-			alias: {
-				'@': '/src',
+				preset: 'smallest',
+				propertyReadSideEffects: false,
+				tryCatchDeoptimization: false,
 			},
-		},
-		css: {
-			preprocessorOptions: {
-				less: {
-					javascriptEnabled: true,
+			output: {
+				manualChunks(id) {
+					if (id.includes('node_modules')) {
+						if (id.includes('apexcharts')) return 'apexcharts';
+						if (id.includes('iconify-icon')) return 'iconify';
+						if (id.includes('overlayscrollbars')) return 'scrollbars';
+						if (id.includes('solid-js')) return 'solid';
+					}
+					return null;
 				},
 			},
 		},
-		build: {
-			minify: 'terser',
-			terserOptions: {
-				compress: {
-					pure_funcs: ['console.log'],
-					passes: 3, // 增加压缩次数
-				},
-			},
-			sourcemap: false,
-			rollupOptions: {
-				output: {
-					manualChunks(id) {
-						if (id.includes('node_modules')) {
-							if (id.includes('antd')) return 'antd';
-							if (id.includes('react')) return 'react';
-							return 'vendor';
-						}
+	},
+	optimizeDeps: {
+		include: ['solid-js', '@iconify-icon/solid'],
+		exclude: ['apexcharts'],
+	},
+	resolve: {
+		alias: {
+			'@': '/src',
+			'@features': '/src/features',
+			'@shared': '/src/shared',
+			'@services': '/src/services',
+		},
+	},
+};
 
-						return null;
-					},
-				},
-			},
-		},
-	});
+export default config;
