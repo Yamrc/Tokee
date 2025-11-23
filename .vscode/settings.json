@@ -3,7 +3,7 @@
     "explorer.fileNesting.expand": true,
     "explorer.fileNesting.patterns": {
         "package.json": "pnpm-lock.yaml, tsconfig.json, vite.config.ts, index.html",
-        "README.md": ".gitignore, LICENSE",
+        "README.md": ".gitignore, LICENSE, vercel.json",
     },
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true,

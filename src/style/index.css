@@ -80,8 +80,12 @@
     --float-panel-bg: oklch(.19 .015 var(--hue));
 }
 
+@theme {
+	--font-sans: 'Roboto', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
 @layer components {
-.card-base {
+    .card-base {
         @apply rounded-(--radius-large) overflow-hidden bg-(--card-bg) transition;
     }
 
@@ -123,6 +127,19 @@
 
     .text-75 {
         @apply text-(--text-secondary);
+    }
+
+    .text-50 {
+        color: rgba(0, 0, 0, 0.5);
+    }
+
+    :root.dark .text-50 {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .link {
+        @apply transition rounded-md p-1 -m-1 relative before:ease-out before:transition active:bg-none hover:before:bg-(--btn-plain-bg-hover) active:before:bg-(--btn-plain-bg-active) z-0
+        before:absolute before:rounded-[inherit] before:inset-0 before:scale-[0.85] hover:before:scale-100 before:-z-10;
     }
 }
 

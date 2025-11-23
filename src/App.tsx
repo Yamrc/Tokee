@@ -6,10 +6,10 @@ import LoadingState from '@shared/components/LoadingState';
 import ErrorState from '@shared/components/ErrorState';
 import MonitorDetail from '@features/monitor/components/MonitorDetail';
 import AppHeader from '@shared/components/AppHeader';
+import Footer from '@shared/components/Footer';
 import Pagination from '@shared/components/Pagination';
 import { parseRoute, navigateToDetail, navigateToList } from '@shared/utils/router';
-
-const STATUSPAGE_ID = 'b7Ow2LAqjd';
+import { siteConfig } from './config';
 
 const App: Component = () => {
 	const [currentPage, setCurrentPage] = createSignal<'list' | 'detail'>('list');
@@ -18,7 +18,7 @@ const App: Component = () => {
 	const [detailRefreshTrigger, setDetailRefreshTrigger] = createSignal(0);
 	const [detailLoading, setDetailLoading] = createSignal(false);
 
-	const monitorsData = useMonitors(STATUSPAGE_ID, currentPageNum);
+	const monitorsData = useMonitors(siteConfig.pageId, currentPageNum);
 
 	const handleRouteChange = () => {
 		const route = parseRoute();
@@ -71,7 +71,7 @@ const App: Component = () => {
 			<main class="relative max-w-(--page-width) w-full md:px-4 mx-auto mt-4 pb-8">
 				{currentPage() === 'detail' && selectedMonitorId() !== null ? (
 					<MonitorDetail
-						statuspageId={STATUSPAGE_ID}
+						statuspageId={siteConfig.pageId}
 						monitorId={selectedMonitorId()!}
 						onBack={() => {}}
 						refreshTrigger={detailRefreshTrigger()}
@@ -100,6 +100,7 @@ const App: Component = () => {
 					</>
 				)}
 			</main>
+			<Footer />
 		</div>
 	);
 };

@@ -1,5 +1,6 @@
 import { Component } from 'solid-js';
 import { Icon } from '@iconify-icon/solid';
+import { siteConfig } from '@/config';
 import DarkModeToggle from './DarkModeToggle';
 
 interface AppHeaderProps {
@@ -18,7 +19,7 @@ const AppHeader: Component<AppHeaderProps> = (props) => (
 			>
 				<div class="flex flex-row text-(--primary) items-center text-md">
 					<Icon icon="material-symbols:home-outline-rounded" width="1.75rem" height="1.75rem" class="mb-1 mr-2" aria-hidden="true" />
-					Tokee
+					{siteConfig.title}
 				</div>
 			</button>
 			<div class="flex items-center gap-1">
