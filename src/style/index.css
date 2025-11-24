@@ -5,7 +5,6 @@
 @import "./scrollbar.css";
 
 :root {
-    --hue: 345;
     --radius-large: 1rem;
     --page-width: 75rem;
 
