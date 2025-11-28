@@ -1,7 +1,6 @@
 # Tokee - 服务状态监控
 
 基于 SolidJS 和 Tailwind CSS 构建的现代化服务状态监控面板，使用 UptimeRobot Stats API 展示监控数据。
-计划在2.0.0采用Astro框架重构，以获得更好的性能和更简单的开发体验。
 
 ## 技术栈
 
