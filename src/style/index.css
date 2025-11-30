@@ -6,7 +6,7 @@
 
 :root {
     --radius-large: 1rem;
-    --page-width: 75rem;
+    --page-width: 85rem;
 
     --primary: oklch(.7 .14 var(--hue));
     --page-bg: oklch(.95 .01 var(--hue));
