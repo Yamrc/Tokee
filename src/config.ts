@@ -4,7 +4,7 @@ export const siteConfig: SiteConfig = {
 	title: 'Tokee',
 	description: 'A beautiful, modern third-party status page for UptimeRobot.',
 	author: 'Yamrc',
-	hue: 345,
+	hue: 295,
 	pageWidth: 85, // rem
 	lang: 'zh-CN',
 	record: {
