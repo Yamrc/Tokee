@@ -13,7 +13,7 @@ const inject_config_plugin = (): Plugin => {
 				.replace(/<title>.*?<\/title>/, `<title>${siteConfig.title}</title>`)
 				.replace(/<meta name="description" content=".*?" \/>/, `<meta name="description" content="${siteConfig.description}" />`)
 				.replace(/<meta name="author" content=".*?" \/>/, `<meta name="author" content="${siteConfig.author}" />`)
-				.replace(/<html lang=".*?"/, `<html lang="${siteConfig.lang || 'zh-CN'}" style="--hue: ${siteConfig.hue};"`);
+				.replace(/<html lang=".*?"/, `<html lang="${siteConfig.lang || 'zh-CN'}" style="--hue: ${siteConfig.hue};--page-width: ${siteConfig.pageWidth}"`);
 		},
 	};
 };

@@ -5,7 +5,6 @@ import 'overlayscrollbars/overlayscrollbars.css';
 
 import './style/index.css';
 import App from './App';
-import { siteConfig } from './config';
 
 console.debug(`
 く__,.ヘヽ.        /  ,ー､ 〉

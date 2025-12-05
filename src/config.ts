@@ -5,6 +5,7 @@ export const siteConfig: SiteConfig = {
 	description: 'A beautiful, modern third-party status page for UptimeRobot.',
 	author: 'Yamrc',
 	hue: 345,
+	pageWidth: 85, // rem
 	lang: 'zh-CN',
 	record: {
 		enable: false,

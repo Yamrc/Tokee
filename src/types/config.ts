@@ -4,6 +4,7 @@ export interface SiteConfig {
 	author: string;
 	lang?: string;
 	hue: number;
+	pageWidth: number;
 	record?: {
 		enable: boolean;
 		text: string;
