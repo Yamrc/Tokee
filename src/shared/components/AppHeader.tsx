@@ -23,7 +23,6 @@ const AppHeader: Component<AppHeaderProps> = (props) => (
 				</div>
 			</button>
 			<div class="flex items-center gap-1">
-				<DarkModeToggle />
 				<button
 					class="btn-plain scale-animation rounded-lg h-11 px-3 inline-flex items-center gap-2 text-sm transition active:scale-90 text-90"
 					onClick={props.onRefresh}
@@ -33,6 +32,7 @@ const AppHeader: Component<AppHeaderProps> = (props) => (
 				>
 					<Icon icon="material-symbols:refresh" width="1.25rem" height="1.25rem" aria-hidden="true" />
 				</button>
+				<DarkModeToggle />
 			</div>
 		</nav>
 	</header>
