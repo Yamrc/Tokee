@@ -14,12 +14,12 @@
 	},
 	"devDependencies": {
 		"@iconify-icon/solid": "^3.0.3",
-		"@iconify-json/material-symbols": "^1.2.49",
-		"@tailwindcss/vite": "^4.1.17",
-		"@types/node": "^24.10.2",
+		"@iconify-json/material-symbols": "^1.2.50",
+		"@tailwindcss/vite": "^4.1.18",
+		"@types/node": "^24.10.3",
 		"rollup-plugin-analyzer": "^4.0.0",
 		"solid-devtools": "^0.34.4",
-		"tailwindcss": "^4.1.17",
+		"tailwindcss": "^4.1.18",
 		"typescript": "^5.9.3",
 		"vite": "^7.2.7",
 		"vite-plugin-solid": "^2.11.10"
