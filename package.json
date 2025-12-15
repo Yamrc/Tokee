@@ -16,7 +16,7 @@
 		"@iconify-icon/solid": "^3.0.3",
 		"@iconify-json/material-symbols": "^1.2.50",
 		"@tailwindcss/vite": "^4.1.18",
-		"@types/node": "^24.10.3",
+		"@types/node": "^24.10.4",
 		"rollup-plugin-analyzer": "^4.0.0",
 		"solid-devtools": "^0.34.4",
 		"tailwindcss": "^4.1.18",
