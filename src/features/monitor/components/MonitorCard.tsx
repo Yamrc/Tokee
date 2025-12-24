@@ -56,7 +56,7 @@ const MonitorCard: Component<MonitorCardProps> = (props) => {
 
 			<div class="flex gap-0.5 mb-4 h-8 items-end">
 				{monitor.dailyRatios.length > 0 ? (
-					<For each={monitor.dailyRatios.slice(-30)}>
+					<For each={monitor.dailyRatios.slice(-30).reverse()}>
 						{(day) => {
 							const ratio = parseFloat(day.ratio);
 							const height = Math.max(ratio, 4);
