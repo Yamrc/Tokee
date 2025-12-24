@@ -3,6 +3,7 @@ import analyze from 'rollup-plugin-analyzer';
 import solidPlugin from 'vite-plugin-solid';
 import devtools from 'solid-devtools/vite';
 import tailwindcss from '@tailwindcss/vite';
+import { execSync } from 'child_process';
 import { siteConfig } from './src/config';
 
 const inject_config_plugin = (): Plugin => {
@@ -13,7 +14,8 @@ const inject_config_plugin = (): Plugin => {
 				.replace(/<title>.*?<\/title>/, `<title>${siteConfig.title}</title>`)
 				.replace(/<meta name="description" content=".*?" \/>/, `<meta name="description" content="${siteConfig.description}" />`)
 				.replace(/<meta name="author" content=".*?" \/>/, `<meta name="author" content="${siteConfig.author}" />`)
-				.replace(/<html lang=".*?"/, `<html lang="${siteConfig.lang || 'zh-CN'}" style="--hue: ${siteConfig.hue};--page-width: ${siteConfig.pageWidth}rem"`);
+				.replace(/<html lang=".*?"/, `<html lang="${siteConfig.lang || 'zh-CN'}" style="--hue: ${siteConfig.hue};--page-width: ${siteConfig.pageWidth}rem"`)
+				.replace(/const GIT_HASH = '.*?';/, `const GIT_HASH = '${execSync('git rev-parse --short HEAD', { encoding: 'utf-8' }).trim() || 'abcdefg'}';`);
 		},
 	};
 };
