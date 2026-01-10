@@ -8,6 +8,8 @@ import MonitorDetail from '@features/monitor/components/MonitorDetail';
 import AppHeader from '@shared/components/AppHeader';
 import Footer from '@shared/components/Footer';
 import Pagination from '@shared/components/Pagination';
+import MonitorCardSkeleton from '@features/monitor/components/MonitorCardSkeleton';
+import StatusOverviewSkeleton from '@features/status/components/StatusOverviewSkeleton';
 import { parseRoute, navigateToDetail, navigateToList } from '@shared/utils/router';
 import { siteConfig } from './config';
 
@@ -117,7 +119,11 @@ const App: Component = () => {
 						onLoadingChange={setDetailLoading}
 					/>
 				) : monitorsData.loading() ? (
-					<LoadingState />
+					<>
+						<StatusOverviewSkeleton />
+						<MonitorCardSkeleton count={6} />
+						<div class="h-8" />
+					</>
 				) : monitorsData.error() ? (
 					<ErrorState onRetry={() => monitorsData.refresh()} />
 				) : (

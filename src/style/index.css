@@ -47,6 +47,8 @@
     --scrollbar-bg-active: var(--scrollbar-bg-active-light);
 
     --float-panel-bg: white;
+    --skeleton-bg: oklch(.92 .01 var(--hue));
+    --skeleton-highlight: oklch(.96 .015 var(--hue));
 }
 
 :root.dark {
@@ -77,6 +79,8 @@
     --scrollbar-bg-active: var(--scrollbar-bg-active-dark);
 
     --float-panel-bg: oklch(.19 .015 var(--hue));
+    --skeleton-bg: oklch(.28 .015 var(--hue));
+    --skeleton-highlight: oklch(.35 .02 var(--hue));
 }
 
 @theme {
@@ -93,6 +97,30 @@
 
     .card-shadow {
         @apply drop-shadow-[0_2px_4px_rgba(0,0,0,0.05)];
+    }
+
+    .skeleton {
+        @apply bg-(--skeleton-bg) animate-skeleton;
+    }
+
+    @keyframes skeleton {
+        0% {
+            background-position: 200% 0;
+        }
+        100% {
+            background-position: -200% 0;
+        }
+    }
+
+    .animate-skeleton {
+        background: linear-gradient(
+            90deg,
+            var(--skeleton-bg) 0%,
+            var(--skeleton-highlight) 50%,
+            var(--skeleton-bg) 100%
+        );
+        background-size: 200% 100%;
+        animation: skeleton 1.5s ease-in-out infinite;
     }
 
     .btn-card {

@@ -1,12 +1,12 @@
 import { Component, createSignal, onMount, createEffect, on, Show, lazy, Suspense } from 'solid-js';
 import { getMonitorDetail } from '@services/api';
 import type { MonitorDetailResponse } from '@/types/api';
-import LoadingState from '@shared/components/LoadingState';
 import ErrorState from '@shared/components/ErrorState';
 import MonitorHeader from './MonitorHeader';
 import UptimeSection from './UptimeSection';
 import ResponseTimeStats from './ResponseTimeStats';
 import RecentEvents from './RecentEvents';
+import MonitorDetailSkeleton from './MonitorDetailSkeleton';
 import { Icon } from '@iconify-icon/solid';
 
 const ResponseTimeChart = lazy(() => import('./ResponseTimeChart'));
@@ -60,7 +60,7 @@ const MonitorDetail: Component<MonitorDetailProps> = (props) => {
 			when={!loading() && !error() && detail()}
 			fallback={
 				<Show when={loading()} fallback={<ErrorState onRetry={() => window.location.reload()} />}>
-					<LoadingState />
+					<MonitorDetailSkeleton />
 				</Show>
 			}
 		>
