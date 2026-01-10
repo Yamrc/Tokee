@@ -100,7 +100,7 @@
     }
 
     .skeleton {
-        @apply bg-(--skeleton-bg) animate-skeleton;
+        @apply bg-(--skeleton-bg);
     }
 
     @keyframes skeleton {
