@@ -80,7 +80,7 @@ const MonitorCard: Component<MonitorCardProps> = (props) => {
 				const firstDate = ratios[0]?.date;
 				const lastDate = ratios[ratios.length - 1]?.date;
 				return firstDate && lastDate ? (
-					<div class="flex items-center justify-between -mt-2 mb-4 text-75 text-xs">
+					<div class="flex items-center justify-between -mt-2 mb-2 text-75 text-xs">
 						<span>{firstDate}</span>
 						<span>{lastDate}</span>
 					</div>
