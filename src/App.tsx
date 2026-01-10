@@ -1,4 +1,4 @@
-import { Component, createSignal, onMount, Show, onCleanup } from 'solid-js';
+import { Component, createSignal, onMount, onCleanup, Show, createEffect, createMemo } from 'solid-js';
 import { useMonitors } from '@features/monitor/hooks/useMonitors';
 import MonitorList from '@features/monitor/components/MonitorList';
 import StatusOverview from '@features/status/components/StatusOverview';
@@ -17,8 +17,27 @@ const App: Component = () => {
 	const [currentPageNum, setCurrentPageNum] = createSignal(1);
 	const [detailRefreshTrigger, setDetailRefreshTrigger] = createSignal(0);
 	const [detailLoading, setDetailLoading] = createSignal(false);
+	const [countdown, setCountdown] = createSignal(0);
 
 	const monitorsData = useMonitors(siteConfig.pageId, currentPageNum);
+
+	const autoRefreshConfig = createMemo(() => siteConfig.autoRefresh ?? { enable: true, interval: 60 });
+
+	let intervalId: number | undefined;
+
+	const resetCountdown = () => {
+		setCountdown(autoRefreshConfig().interval);
+	};
+
+	const tick = () => {
+		setCountdown((prev) => {
+			if (prev <= 1) {
+				handleRefresh();
+				return autoRefreshConfig().interval;
+			}
+			return prev - 1;
+		});
+	};
 
 	const handleRouteChange = () => {
 		const route = parseRoute();
@@ -36,10 +55,29 @@ const App: Component = () => {
 	onMount(() => {
 		handleRouteChange();
 		window.addEventListener('popstate', handleRouteChange);
+
+		if (autoRefreshConfig().enable) {
+			resetCountdown();
+			intervalId = setInterval(tick, 1000) as unknown as number;
+		}
 	});
 
 	onCleanup(() => {
 		window.removeEventListener('popstate', handleRouteChange);
+		if (intervalId) {
+			clearInterval(intervalId);
+		}
+	});
+
+	createEffect(() => {
+		if (!autoRefreshConfig().enable && intervalId) {
+			clearInterval(intervalId);
+			intervalId = undefined;
+			setCountdown(0);
+		} else if (autoRefreshConfig().enable && !intervalId) {
+			resetCountdown();
+			intervalId = setInterval(tick, 1000) as unknown as number;
+		}
 	});
 
 	const handlePageChange = (page: number) => {
@@ -56,6 +94,7 @@ const App: Component = () => {
 		} else {
 			monitorsData.refresh();
 		}
+		resetCountdown();
 	};
 
 	return (
@@ -100,7 +139,7 @@ const App: Component = () => {
 					</>
 				)}
 			</main>
-			<Footer />
+			<Footer countdown={autoRefreshConfig().enable ? countdown() : 0} />
 		</div>
 	);
 };

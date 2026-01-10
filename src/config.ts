@@ -13,5 +13,9 @@ export const siteConfig: SiteConfig = {
 		url: '',
 	},
 	pageId: 'b7Ow2LAqjd',
+	autoRefresh: {
+		enable: true,
+		interval: 300,
+	},
 };
 

@@ -1,3 +1,8 @@
+export interface AutoRefreshConfig {
+	enable: boolean;
+	interval: number;
+}
+
 export interface SiteConfig {
 	title: string;
 	description: string;
@@ -11,4 +16,5 @@ export interface SiteConfig {
 		url: string;
 	};
 	pageId: string;
+	autoRefresh?: AutoRefreshConfig;
 }

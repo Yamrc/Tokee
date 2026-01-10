@@ -54,7 +54,7 @@ const MonitorCard: Component<MonitorCardProps> = (props) => {
 				</div>
 			</div>
 
-			<div class="flex gap-0.5 mb-4 h-8 items-end">
+			<div class="flex gap-0.5 mb-4 h-8 items-end relative">
 				{monitor.dailyRatios.length > 0 ? (
 					<For each={monitor.dailyRatios.slice(-30).reverse()}>
 						{(day) => {
@@ -75,6 +75,17 @@ const MonitorCard: Component<MonitorCardProps> = (props) => {
 					<div class="text-75 text-xs w-full text-center">暂无数据</div>
 				)}
 			</div>
+			{monitor.dailyRatios.length > 0 && (() => {
+				const ratios = monitor.dailyRatios.slice(-30);
+				const firstDate = ratios[0]?.date;
+				const lastDate = ratios[ratios.length - 1]?.date;
+				return firstDate && lastDate ? (
+					<div class="flex items-center justify-between -mt-2 mb-4 text-75 text-xs">
+						<span>{firstDate}</span>
+						<span>{lastDate}</span>
+					</div>
+				) : null;
+			})()}
 
 			<div class="flex items-center justify-between text-sm text-75 flex-wrap gap-2">
 				<div class="flex items-center gap-4">
