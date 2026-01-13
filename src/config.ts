@@ -1,4 +1,4 @@
-import { SiteConfig } from "@/types/config";
+import { SiteConfig, NavBarConfig } from "@/types/config";
 
 export const siteConfig: SiteConfig = {
 	title: 'Tokee',
@@ -17,5 +17,9 @@ export const siteConfig: SiteConfig = {
 		enable: true,
 		interval: 300,
 	},
+};
+
+export const navBarConfig: NavBarConfig = {
+	links: [],
 };
 

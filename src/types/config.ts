@@ -3,6 +3,15 @@ export interface AutoRefreshConfig {
 	interval: number;
 }
 
+export type NavBarLink = {
+	name: string;
+	url: string;
+};
+
+export type NavBarConfig = {
+	links: NavBarLink[];
+};
+
 export interface SiteConfig {
 	title: string;
 	description: string;

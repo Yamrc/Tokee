@@ -1,6 +1,7 @@
-import { Component } from 'solid-js';
+import { Component, For } from 'solid-js';
 import { Icon } from '@iconify-icon/solid';
 import { siteConfig } from '@/config';
+import { navBarConfig } from '@/config';
 import DarkModeToggle from './DarkModeToggle';
 
 interface AppHeaderProps {
@@ -22,6 +23,21 @@ const AppHeader: Component<AppHeaderProps> = (props) => (
 					{siteConfig.title}
 				</div>
 			</button>
+			<div class="hidden md:flex">
+				<For each={navBarConfig.links}>
+					{(link) => (
+						<a
+							href={link.url}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="btn-plain scale-animation rounded-lg h-11 font-bold px-5 active:scale-95"
+							aria-label={link.name}
+						>
+							{link.name}
+						</a>
+					)}
+				</For>
+			</div>
 			<div class="flex items-center gap-1">
 				<button
 					class="btn-plain scale-animation rounded-lg h-11 px-3 inline-flex items-center gap-2 text-sm transition active:scale-90 text-90"
