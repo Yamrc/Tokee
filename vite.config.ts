@@ -34,6 +34,8 @@ const config: UserConfig = {
 			'@features': '/src/features',
 			'@shared': '/src/shared',
 			'@services': '/src/services',
+			'@hooks': '/src/hooks',
+			'@components': '/src/components',
 		},
 	},
 };

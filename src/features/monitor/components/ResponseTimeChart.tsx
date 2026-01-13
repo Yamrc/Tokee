@@ -1,5 +1,6 @@
 import { Component, onMount, onCleanup, createSignal, createEffect, createMemo } from 'solid-js';
 import type { ResponseTimeData } from '@/types/api';
+import { formatLocalDatetime } from '@shared/utils/timeUtils';
 
 interface ResponseTimeChartProps {
 	responseTimes: ResponseTimeData[];
@@ -26,17 +27,6 @@ const getCssVar = (name: string, fallback: string): string =>
 
 const formatTime = (value: number, decimals = 0): string =>
 	value < 1000 ? `${Math.round(value)}ms` : `${(value / 1000).toFixed(decimals)}s`;
-
-const formatDatetime = (timestamp: number): string => {
-	const date = new Date(timestamp);
-	const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-	const month = months[date.getMonth()];
-	const day = date.getDate();
-	const year = date.getFullYear();
-	const hours = String(date.getHours()).padStart(2, '0');
-	const minutes = String(date.getMinutes()).padStart(2, '0');
-	return `${month} ${day}, ${year} ${hours}:${minutes}`;
-};
 
 const formatTimeLabel = (timestamp: number): string => {
 	const date = new Date(timestamp);
@@ -419,7 +409,7 @@ const ResponseTimeChart: Component<ResponseTimeChartProps> = (props) => {
 						<div class="w-3 h-3 rounded-full" style={{ background: primaryColor() }} />
 						<span class="font-medium">响应时间</span>
 					</div>
-					<div class="text-xs opacity-75 mb-1">{formatDatetime(new Date(hoveredPoint()!.datetime).getTime())}</div>
+					<div class="text-xs opacity-75 mb-1">{formatLocalDatetime(hoveredPoint()!.datetime)}</div>
 					<div class="font-semibold">{formatTime(hoveredPoint()!.value, 2)}</div>
 				</div>
 			)}

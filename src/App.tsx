@@ -1,152 +1,107 @@
-import { Component, createSignal, onMount, onCleanup, Show, createEffect, createMemo } from 'solid-js';
+import { Component, Show, createMemo, createSignal } from 'solid-js';
+import useRoute from '@hooks/useRoute';
+import useAutoRefresh from '@hooks/useAutoRefresh';
+import { siteConfig } from './config';
+import { clearCacheForRefresh } from '@services/api';
 import { useMonitors } from '@features/monitor/hooks/useMonitors';
+import AppLayout from '@components/Layout/AppLayout';
 import MonitorList from '@features/monitor/components/MonitorList';
 import StatusOverview from '@features/status/components/StatusOverview';
-import LoadingState from '@shared/components/LoadingState';
-import ErrorState from '@shared/components/ErrorState';
 import MonitorDetail from '@features/monitor/components/MonitorDetail';
-import AppHeader from '@shared/components/AppHeader';
-import Footer from '@shared/components/Footer';
 import Pagination from '@shared/components/Pagination';
 import MonitorCardSkeleton from '@features/monitor/components/MonitorCardSkeleton';
 import StatusOverviewSkeleton from '@features/status/components/StatusOverviewSkeleton';
-import { parseRoute, navigateToDetail, navigateToList } from '@shared/utils/router';
-import { siteConfig } from './config';
+import ErrorState from '@shared/components/ErrorState';
+import ErrorBoundary from '@components/UI/ErrorBoundary';
+import type { ProcessedMonitor } from '@/types/api';
 
 const App: Component = () => {
-	const [currentPage, setCurrentPage] = createSignal<'list' | 'detail'>('list');
-	const [selectedMonitorId, setSelectedMonitorId] = createSignal<number | null>(null);
-	const [currentPageNum, setCurrentPageNum] = createSignal(1);
-	const [detailRefreshTrigger, setDetailRefreshTrigger] = createSignal(0);
-	const [detailLoading, setDetailLoading] = createSignal(false);
-	const [countdown, setCountdown] = createSignal(0);
+	const { currentRoute, navigateToList, navigateToDetail, initRoute } = useRoute();
+
+	const autoRefreshConfig = createMemo(() => siteConfig.autoRefresh ?? { enable: true, interval: 300 });
+
+	const isDetailPage = createMemo(() => currentRoute().type === 'detail');
+	const monitorId = createMemo(() => currentRoute().monitorId);
+	const currentPageNum = createMemo(() => currentRoute().page);
 
 	const monitorsData = useMonitors(siteConfig.pageId, currentPageNum);
 
-	const autoRefreshConfig = createMemo(() => siteConfig.autoRefresh ?? { enable: true, interval: 60 });
+	const [detailRefreshTrigger, setDetailRefreshTrigger] = createSignal(0);
 
-	let intervalId: number | undefined;
-
-	const resetCountdown = () => {
-		setCountdown(autoRefreshConfig().interval);
-	};
-
-	const tick = () => {
-		setCountdown((prev) => {
-			if (prev <= 1) {
-				handleRefresh();
-				return autoRefreshConfig().interval;
-			}
-			return prev - 1;
-		});
-	};
-
-	const handleRouteChange = () => {
-		const route = parseRoute();
-		if (route.type === 'detail' && route.monitorId) {
-			setCurrentPage('detail');
-			setSelectedMonitorId(route.monitorId);
+	const handleRefresh = () => {
+		if (isDetailPage() && monitorId()) {
+			clearCacheForRefresh(siteConfig.pageId, monitorId()!);
+			setDetailRefreshTrigger((prev) => prev + 1);
 		} else {
-			setCurrentPage('list');
-			setSelectedMonitorId(null);
-			const page = route.page || 1;
-			setCurrentPageNum(page);
+			clearCacheForRefresh(siteConfig.pageId);
+			monitorsData.refresh();
 		}
 	};
 
-	onMount(() => {
-		handleRouteChange();
-		window.addEventListener('popstate', handleRouteChange);
-
-		if (autoRefreshConfig().enable) {
-			resetCountdown();
-			intervalId = setInterval(tick, 1000) as unknown as number;
-		}
-	});
-
-	onCleanup(() => {
-		window.removeEventListener('popstate', handleRouteChange);
-		if (intervalId) {
-			clearInterval(intervalId);
-		}
-	});
-
-	createEffect(() => {
-		if (!autoRefreshConfig().enable && intervalId) {
-			clearInterval(intervalId);
-			intervalId = undefined;
-			setCountdown(0);
-		} else if (autoRefreshConfig().enable && !intervalId) {
-			resetCountdown();
-			intervalId = setInterval(tick, 1000) as unknown as number;
-		}
-	});
+	const handleHomeClick = () => {
+		navigateToList(1);
+	};
 
 	const handlePageChange = (page: number) => {
 		if (page >= 1 && page <= monitorsData.totalPages()) {
 			navigateToList(page);
-			handleRouteChange();
 			window.scrollTo({ top: 0, behavior: 'smooth' });
 		}
 	};
 
-	const handleRefresh = () => {
-		if (currentPage() === 'detail') {
-			setDetailRefreshTrigger((prev) => prev + 1);
-		} else {
-			monitorsData.refresh();
-		}
-		resetCountdown();
+	const handleMonitorClick = (monitor: ProcessedMonitor) => {
+		navigateToDetail(monitor.id);
 	};
 
+	const { countdown } = useAutoRefresh({
+		config: autoRefreshConfig,
+		onRefresh: handleRefresh,
+	});
+
+	const loading = createMemo(() => monitorsData.loading());
+
+	initRoute();
+
 	return (
-		<div class="min-h-screen bg-(--page-bg)">
-			<AppHeader
-				onHomeClick={() => {
-					navigateToList(currentPageNum());
-					handleRouteChange();
-				}}
+		<ErrorBoundary>
+			<AppLayout
+				onHomeClick={handleHomeClick}
 				onRefresh={handleRefresh}
-				loading={monitorsData.loading() || detailLoading()}
-			/>
-			<main class="relative max-w-(--page-width) w-full md:px-4 mx-auto mt-4 pb-8">
-				{currentPage() === 'detail' && selectedMonitorId() !== null ? (
+				loading={loading()}
+				countdown={autoRefreshConfig().enable ? countdown() : 0}
+			>
+				<Show when={isDetailPage() && monitorId() !== null} fallback={
+					<Show when={!loading()} fallback={
+						<>
+							<StatusOverviewSkeleton />
+							<MonitorCardSkeleton count={6} />
+							<div class="h-8" />
+						</>
+					}>
+						<Show when={!monitorsData.error()} fallback={<ErrorState onRetry={() => monitorsData.refresh()} />}>
+							<StatusOverview monitors={monitorsData.monitors()} />
+							<MonitorList
+								monitors={monitorsData.monitors()}
+								onMonitorClick={handleMonitorClick}
+							/>
+							<Pagination
+								currentPage={currentPageNum()}
+								totalPages={monitorsData.totalPages()}
+								loading={loading()}
+								onPageChange={handlePageChange}
+							/>
+						</Show>
+					</Show>
+				}>
 					<MonitorDetail
 						statuspageId={siteConfig.pageId}
-						monitorId={selectedMonitorId()!}
-						onBack={() => {}}
+						monitorId={monitorId()!}
 						refreshTrigger={detailRefreshTrigger()}
-						onLoadingChange={setDetailLoading}
+						onBack={() => navigateToList(currentPageNum())}
 					/>
-				) : monitorsData.loading() ? (
-					<>
-						<StatusOverviewSkeleton />
-						<MonitorCardSkeleton count={6} />
-						<div class="h-8" />
-					</>
-				) : monitorsData.error() ? (
-					<ErrorState onRetry={() => monitorsData.refresh()} />
-				) : (
-					<>
-						<StatusOverview monitors={monitorsData.monitors()} />
-						<MonitorList
-							monitors={monitorsData.monitors()}
-							onMonitorClick={(monitor) => {
-								navigateToDetail(monitor.id);
-								handleRouteChange();
-							}}
-						/>
-						<Pagination
-							currentPage={currentPageNum()}
-							totalPages={monitorsData.totalPages()}
-							loading={monitorsData.loading()}
-							onPageChange={handlePageChange}
-						/>
-					</>
-				)}
-			</main>
-			<Footer countdown={autoRefreshConfig().enable ? countdown() : 0} />
-		</div>
+				</Show>
+			</AppLayout>
+		</ErrorBoundary>
 	);
 };
 

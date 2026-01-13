@@ -16,32 +16,30 @@ interface MonitorDetailProps {
 	monitorId: number;
 	onBack: () => void;
 	refreshTrigger?: number;
-	onLoadingChange?: (loading: boolean) => void;
 }
 
 const MonitorDetail: Component<MonitorDetailProps> = (props) => {
 	const [detail, setDetail] = createSignal<MonitorDetailResponse | null>(null);
 	const [loading, setLoading] = createSignal(true);
 	const [error, setError] = createSignal<string | null>(null);
+	const [refreshBypass, setRefreshBypass] = createSignal(false);
 
-	const fetchDetail = async () => {
+	const fetchDetail = async (bypassCache = false) => {
 		try {
 			setLoading(true);
-			props.onLoadingChange?.(true);
 			setError(null);
-			const data = await getMonitorDetail(props.statuspageId, props.monitorId);
+			const data = await getMonitorDetail(props.statuspageId, props.monitorId, undefined, bypassCache);
 			setDetail(data);
 		} catch (err) {
 			console.error('Failed to fetch monitor detail:', err);
 			setError(err instanceof Error ? err.message : '未知错误');
 		} finally {
 			setLoading(false);
-			props.onLoadingChange?.(false);
 		}
 	};
 
 	onMount(() => {
-		fetchDetail();
+		fetchDetail(false);
 	});
 
 	createEffect(
@@ -49,7 +47,8 @@ const MonitorDetail: Component<MonitorDetailProps> = (props) => {
 			() => props.refreshTrigger ?? 0,
 			(trigger) => {
 				if (trigger > 0) {
-					fetchDetail();
+					setRefreshBypass(true);
+					fetchDetail(true);
 				}
 			}
 		)
@@ -59,7 +58,7 @@ const MonitorDetail: Component<MonitorDetailProps> = (props) => {
 		<Show
 			when={!loading() && !error() && detail()}
 			fallback={
-				<Show when={loading()} fallback={<ErrorState onRetry={() => window.location.reload()} />}>
+				<Show when={loading()} fallback={<ErrorState onRetry={() => fetchDetail(true)} />}>
 					<MonitorDetailSkeleton />
 				</Show>
 			}

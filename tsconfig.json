@@ -27,7 +27,17 @@
 			],
 			"@services/*": [
 				"src/services/*"
+			],
+			"@hooks/*": [
+				"src/hooks/*"
+			],
+			"@components/*": [
+				"src/components/*"
 			]
 		}
-	}
+	},
+	"include": [
+		"src/**/*",
+		"src/**/*.d.ts"
+	]
 }

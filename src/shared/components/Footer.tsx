@@ -28,7 +28,7 @@ const Footer: Component<FooterProps> = (props) => {
 					</Show>
 					{' · '}
 					<span class="inline-flex items-center align-baseline gap-1">
-						<Icon icon="material-symbols:commit-rounded" width="0.875rem" height="0.875rem" />{window._git_hash}
+						<Icon icon="material-symbols:commit-rounded" width="0.875rem" height="0.875rem" />{(window as { _git_hash?: string })._git_hash ?? 'unknown'}
 					</span>
 					{siteConfig.record?.enable && (
 						<>
