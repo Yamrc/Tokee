@@ -5,26 +5,27 @@ export interface RouteState {
 }
 
 export function parseRoute(): RouteState {
-	const { pathname, searchParams } = new URL(window.location.href);
-	if (pathname.startsWith('/monitor')) {
-		const id = searchParams.get('id');
-		if (id) {
-			const monitorId = Number.parseInt(id, 10);
-			if (!Number.isNaN(monitorId)) return { type: 'detail', monitorId };
-		}
+	const { searchParams } = new URL(window.location.href);
+	
+	const monitorIdParam = searchParams.get('m');
+	if (monitorIdParam) {
+		const monitorId = Number.parseInt(monitorIdParam, 10);
+		if (!Number.isNaN(monitorId)) return { type: 'detail', monitorId };
 	}
-	const page = Number.parseInt(searchParams.get('page') || '1', 10);
+
+	const pageParam = searchParams.get('p');
+	const page = Number.parseInt(pageParam || '1', 10);
 	return { type: 'list', page: Number.isNaN(page) || page < 1 ? 1 : page };
 }
 
 export function navigateToDetail(monitorId: number): void {
-	const url = new URL(`/monitor?id=${monitorId}`, window.location.origin);
-	history.pushState({ type: 'detail', monitorId }, '', url.pathname + url.search);
+	const url = `/?m=${monitorId}`;
+	history.pushState({ type: 'detail', monitorId }, '', url);
 	window.dispatchEvent(new PopStateEvent('popstate'));
 }
 
 export function navigateToList(page = 1): void {
-	const url = page === 1 ? '/' : `/?page=${page}`;
+	const url = `/?p=${page}`;
 	history.pushState({ type: 'list', page }, '', url);
 	window.dispatchEvent(new PopStateEvent('popstate'));
 }
