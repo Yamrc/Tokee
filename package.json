@@ -14,11 +14,11 @@
 	},
 	"devDependencies": {
 		"@iconify-icon/solid": "^3.0.3",
-		"@iconify-json/material-symbols": "^1.2.51",
+		"@iconify-json/material-symbols": "^1.2.53",
 		"@tailwindcss/vite": "^4.1.18",
 		"@types/node": "^24.10.9",
 		"rollup-plugin-analyzer": "^4.0.0",
-		"solid-devtools": "^0.34.4",
+		"solid-devtools": "^0.34.5",
 		"tailwindcss": "^4.1.18",
 		"typescript": "^5.9.3",
 		"vite": "^7.3.1",
@@ -26,6 +26,6 @@
 	},
 	"dependencies": {
 		"overlayscrollbars": "^2.13.0",
-		"solid-js": "^1.9.10"
+		"solid-js": "^1.9.11"
 	}
 }
