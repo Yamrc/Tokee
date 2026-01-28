@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       overlayscrollbars:
-        specifier: ^2.13.0
-        version: 2.13.0
+        specifier: ^2.14.0
+        version: 2.14.0
       solid-js:
         specifier: ^1.9.11
         version: 1.9.11
@@ -892,8 +892,8 @@ packages:
   node-releases@2.0.27:
     resolution: {integrity: sha512-nmh3lCkYZ3grZvqcCH+fjmQ7X+H0OeZgP40OierEaAptX4XofMh5kwNbWh7lBduUzCcV/8kZ+NDLCwm2iorIlA==}
 
-  overlayscrollbars@2.13.0:
-    resolution: {integrity: sha512-uQGpLESrbFDLTWucWAKX9ceIANj7detMwH/2yJ315Llt72ZcWN3P6ckMotoqVv2Mk29R/pnhDtgYjy4K+kwAyQ==}
+  overlayscrollbars@2.14.0:
+    resolution: {integrity: sha512-RjV0pqc79kYhQLC3vTcLRb5GLpI1n6qh0Oua3g+bGH4EgNOJHVBGP7u0zZtxoAa0dkHlAqTTSYRb9MMmxNLjig==}
 
   parse5@7.3.0:
     resolution: {integrity: sha512-IInvU7fabl34qmi9gY8XOVxhYyMyuH2xUNpb2q8/Y+7552KlejkRvqvD19nMoUW/uQGGbqNpA6Tufu5FL5BZgw==}
@@ -1817,7 +1817,7 @@ snapshots:
 
   node-releases@2.0.27: {}
 
-  overlayscrollbars@2.13.0: {}
+  overlayscrollbars@2.14.0: {}
 
   parse5@7.3.0:
     dependencies:
