@@ -14,7 +14,7 @@
 	},
 	"devDependencies": {
 		"@iconify-icon/solid": "^3.0.3",
-		"@iconify-json/material-symbols": "^1.2.55",
+		"@iconify-json/material-symbols": "^1.2.56",
 		"@tailwindcss/vite": "^4.2.0",
 		"@types/node": "^24.10.13",
 		"rollup-plugin-analyzer": "^4.0.0",
