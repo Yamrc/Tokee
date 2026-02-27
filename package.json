@@ -25,6 +25,7 @@
 		"vite-plugin-solid": "^2.11.10"
 	},
 	"dependencies": {
+		"@fontsource/roboto": "^5.2.9",
 		"overlayscrollbars": "^2.14.0",
 		"solid-js": "^1.9.11"
 	}
