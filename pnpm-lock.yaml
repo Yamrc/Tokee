@@ -22,8 +22,8 @@ importers:
         specifier: ^3.0.3
         version: 3.0.3(solid-js@1.9.11)
       '@iconify-json/material-symbols':
-        specifier: ^1.2.60
-        version: 1.2.60
+        specifier: ^1.2.61
+        version: 1.2.61
       '@tailwindcss/vite':
         specifier: ^4.2.1
         version: 4.2.1(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.31.1))
@@ -353,8 +353,8 @@ packages:
     peerDependencies:
       solid-js: '>=1.0.0'
 
-  '@iconify-json/material-symbols@1.2.60':
-    resolution: {integrity: sha512-bmVrnz/9KJNh/j+nO3pyxzo0h8iENIKxv5RASDURhjKdPI53rRcKN7E2Gmwi25k9CBJ+IC6L9l0AGgngeqyRuw==}
+  '@iconify-json/material-symbols@1.2.61':
+    resolution: {integrity: sha512-zzk6utjXKTyUZxbtv6GQ6227WZDinN6xKcdMIM9F6CS+bmt1Zcqs8PKWKChcvexDkEe5zqkVqUsUhhNW/WaGzQ==}
 
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
@@ -1346,7 +1346,7 @@ snapshots:
       iconify-icon: 3.0.2
       solid-js: 1.9.11
 
-  '@iconify-json/material-symbols@1.2.60':
+  '@iconify-json/material-symbols@1.2.61':
     dependencies:
       '@iconify/types': 2.0.0
 
