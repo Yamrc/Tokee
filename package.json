@@ -14,15 +14,15 @@
 	},
 	"devDependencies": {
 		"@iconify-icon/solid": "^3.0.3",
-		"@iconify-json/material-symbols": "^1.2.60",
-		"@tailwindcss/vite": "^4.2.1",
+		"@iconify-json/material-symbols": "^1.2.63",
+		"@tailwindcss/vite": "^4.2.2",
 		"@types/node": "^24.12.0",
 		"rollup-plugin-analyzer": "^4.0.0",
 		"solid-devtools": "^0.34.5",
-		"tailwindcss": "^4.2.1",
+		"tailwindcss": "^4.2.2",
 		"typescript": "^5.9.3",
 		"vite": "^7.3.1",
-		"vite-plugin-solid": "^2.11.10"
+		"vite-plugin-solid": "^2.11.11"
 	},
 	"dependencies": {
 		"@fontsource/roboto": "^5.2.9",
