@@ -14,19 +14,19 @@
 	},
 	"devDependencies": {
 		"@iconify-icon/solid": "^3.0.3",
-		"@iconify-json/material-symbols": "^1.2.60",
+		"@iconify-json/material-symbols": "^1.2.71",
 		"@tailwindcss/vite": "^4.2.1",
-		"@types/node": "^24.12.0",
+		"@types/node": "^24.12.4",
 		"rollup-plugin-analyzer": "^4.0.0",
 		"solid-devtools": "^0.34.5",
 		"tailwindcss": "^4.2.1",
 		"typescript": "^5.9.3",
-		"vite": "^7.3.1",
-		"vite-plugin-solid": "^2.11.10"
+		"vite": "^7.3.3",
+		"vite-plugin-solid": "^2.11.12"
 	},
 	"dependencies": {
 		"@fontsource/roboto": "^5.2.9",
 		"overlayscrollbars": "^2.14.0",
-		"solid-js": "^1.9.11"
+		"solid-js": "^1.9.12"
 	}
 }
