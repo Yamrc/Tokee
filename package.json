@@ -19,7 +19,7 @@
 		"@types/node": "^24.12.4",
 		"rollup-plugin-analyzer": "^4.0.0",
 		"solid-devtools": "^0.34.5",
-		"tailwindcss": "^4.2.1",
+		"tailwindcss": "^4.3.0",
 		"typescript": "^5.9.3",
 		"vite": "^7.3.3",
 		"vite-plugin-solid": "^2.11.12"
