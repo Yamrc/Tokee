@@ -1,13 +1,50 @@
-# Tokee - 服务状态监控
+# Tokee
 
-基于 SolidJS 和 Tailwind CSS 构建的现代化服务状态监控面板，使用 UptimeRobot Stats API 展示监控数据。
+A modern service status dashboard built with **Astro** (static), **Svelte islands**, and **Tailwind CSS v4**. Monitor data is fetched **client-side** from the UptimeRobot Stats API.
 
-## 配置
+## Stack
 
-在 `src/config.ts` 中修改 `pageId` 为你的 UptimeRobot Status Page ID：
+- Astro static output (`/`, `/monitors?id=…`, `/404`)
+- Svelte 5 islands for interactive UI
+- Tailwind CSS v4 (CSS-first)
+- Swup page transitions (RC-Blog-aligned shell)
+
+## Configuration
+
+Edit `src/config.ts`:
 
 ```typescript
-export const siteConfig: SiteConfig = {
-    pageId = 'your-statuspage-id';
+export const siteConfig = {
+  // UptimeRobot public status page id
+  pageId: 'your-statuspage-id',
+  // Optional: auto-refresh monitors (seconds)
+  autoRefresh: {
+    enable: true,
+    interval: 300,
+  },
+  // ...
+};
+
+export const navBarConfig = {
+  links: [
+    // Only links with non-empty `url` are shown
+    { name: 'Blog', url: 'https://example.com' },
+  ],
 };
 ```
+
+## Scripts
+
+```bash
+pnpm install
+pnpm dev      # http://127.0.0.1:7210
+pnpm build
+pnpm preview
+pnpm check
+```
+
+## Notes
+
+- High-timeliness UptimeRobot data is always fetched in the browser (not at build time).
+- Detail route uses query params: `/monitors?id=123` (no `[id].astro` / `getStaticPaths`).
+- Icons use `@iconify/svelte` only.

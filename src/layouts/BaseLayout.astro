@@ -1,0 +1,54 @@
+---
+import '@styles/global.css';
+import { execSync } from 'node:child_process';
+import { siteConfig } from '@config';
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const { title = siteConfig.title, description = siteConfig.description } = Astro.props;
+const gitHash = (() => {
+	try {
+		return execSync('git rev-parse --short HEAD', { encoding: 'utf-8' }).trim() || 'unknown';
+	} catch {
+		return 'unknown';
+	}
+})();
+---
+
+<!doctype html>
+<html lang={siteConfig.lang ?? 'zh-CN'} class="bg-(--page-bg) transition text-[14px] md:text-[16px] initial-load" style={`--hue: ${siteConfig.hue}; --page-width: ${siteConfig.pageWidth}rem;`}>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content={description} />
+		<meta name="author" content={siteConfig.author} />
+		<meta name="robots" content="index, follow" />
+		<title>{title}</title>
+		<link rel="icon" href="/favicon.ico" sizes="any" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<script is:inline define:vars={{ gitHash }}>
+			window._git_hash = gitHash;
+			const theme = localStorage.getItem('theme') || 'auto';
+			const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+			const isDark = theme === 'dark' || (theme === 'auto' && prefersDark);
+			document.documentElement.classList.toggle('dark', isDark);
+			document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';
+		</script>
+	</head>
+	<body class="min-h-screen transition">
+		<noscript>Javascript must be enabled.</noscript>
+		<slot />
+		<div id="page-scrollbar" class="hidden" aria-hidden="true"><div id="page-scrollbar-thumb"></div></div>
+		<div id="page-height-extend" class="hidden h-[300vh]"></div>
+		<script>
+			import { setupPageScrollbar, updatePageScrollbar } from '@scripts/page-scrollbar';
+			import '@scripts/swup';
+
+			setupPageScrollbar();
+			updatePageScrollbar();
+		</script>
+	</body>
+</html>

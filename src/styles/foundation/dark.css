@@ -1,0 +1,31 @@
+:root.dark {
+	--primary: oklch(.75 .14 var(--hue));
+	--page-bg: oklch(.16 .014 var(--hue));
+	--card-bg: oklch(.23 .015 var(--hue));
+	--float-panel-bg: oklch(.19 .015 var(--hue));
+
+	--btn-content: oklch(.75 .1 var(--hue));
+	--btn-regular-bg: oklch(.33 .035 var(--hue));
+	--btn-regular-bg-hover: oklch(.38 .04 var(--hue));
+	--btn-regular-bg-active: oklch(.43 .045 var(--hue));
+	--btn-plain-bg-hover: oklch(.30 .035 var(--hue));
+	--btn-plain-bg-active: oklch(.27 .025 var(--hue));
+	--btn-card-bg-hover: oklch(.3 .03 var(--hue));
+	--btn-card-bg-active: oklch(.35 .035 var(--hue));
+
+	--text-primary: oklch(.90 .01 var(--hue));
+	--text-secondary: oklch(.70 .01 var(--hue));
+	--text-muted: rgba(255, 255, 255, .5);
+
+	--line-divider: rgba(255, 255, 255, .08);
+	--line-color: rgba(255, 255, 255, .1);
+	--meta-divider: rgba(255, 255, 255, .2);
+	--status-success-badge: oklch(.50 .20 150);
+	--status-error-badge: oklch(.50 .20 25);
+	--status-warning-badge: oklch(.55 .14 60);
+	--skeleton-bg: oklch(.28 .015 var(--hue));
+	--skeleton-highlight: oklch(.35 .02 var(--hue));
+	--scrollbar-bg: var(--scrollbar-bg-dark);
+	--scrollbar-bg-hover: var(--scrollbar-bg-hover-dark);
+	--scrollbar-bg-active: var(--scrollbar-bg-active-dark);
+}

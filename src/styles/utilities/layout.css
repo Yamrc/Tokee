@@ -1,0 +1,21 @@
+.page-shell {
+	min-height: 100vh;
+	background: var(--page-bg);
+}
+
+.max-page-width {
+	width: 100%;
+	max-width: var(--page-width);
+}
+
+.status-body {
+	/* RC-Blog anchors content under sticky navbar via absolute top offset. */
+	min-height: calc(100vh - 5.5rem);
+}
+
+.status-main {
+	position: relative;
+	z-index: 30;
+	/* Only bottom spacing; top is handled by absolute body offset (5.5rem). */
+	padding-block: 0 2rem;
+}

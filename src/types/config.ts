@@ -1,5 +1,6 @@
 export interface AutoRefreshConfig {
 	enable: boolean;
+	/** Interval in seconds. */
 	interval: number;
 }
 
@@ -19,11 +20,6 @@ export interface SiteConfig {
 	lang?: string;
 	hue: number;
 	pageWidth: number;
-	record?: {
-		enable: boolean;
-		text: string;
-		url: string;
-	};
 	pageId: string;
 	autoRefresh?: AutoRefreshConfig;
 }

@@ -1,0 +1,10 @@
+---
+import StatusLayout from '@layouts/StatusLayout.astro';
+import { siteConfig } from '@config';
+import MonitorDetailIsland from '@islands/MonitorDetailIsland.svelte';
+---
+
+<StatusLayout active="monitors" title={`Monitors · ${siteConfig.title}`} description="Tokee monitor dashboard shell.">
+	<h1 class="sr-only">监控详情</h1>
+	<MonitorDetailIsland client:only="svelte" />
+</StatusLayout>

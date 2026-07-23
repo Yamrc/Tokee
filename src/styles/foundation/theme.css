@@ -1,0 +1,59 @@
+:root {
+	--hue: 295;
+	--radius-large: 1rem;
+	--radius-medium: .75rem;
+	--radius-small: .5rem;
+	--content-delay: 150ms;
+	--page-width: 85rem;
+	--space-page-x: 1rem;
+	--space-section: 1.5rem;
+	--duration-fast: 150ms;
+	--duration-regular: 200ms;
+	--ease-standard: cubic-bezier(.2, 0, 0, 1);
+
+	--primary: oklch(.7 .14 var(--hue));
+	--page-bg: oklch(.95 .01 var(--hue));
+	--card-bg: white;
+	--float-panel-bg: white;
+
+	--btn-content: oklch(.55 .12 var(--hue));
+	--btn-regular-bg: oklch(.95 .025 var(--hue));
+	--btn-regular-bg-hover: oklch(.9 .05 var(--hue));
+	--btn-regular-bg-active: oklch(.85 .08 var(--hue));
+	--btn-plain-bg-hover: oklch(.95 .025 var(--hue));
+	--btn-plain-bg-active: oklch(.98 .01 var(--hue));
+	--btn-card-bg-hover: oklch(.98 .005 var(--hue));
+	--btn-card-bg-active: oklch(.9 .03 var(--hue));
+
+	--text-primary: oklch(.25 .02 var(--hue));
+	--text-secondary: oklch(.45 .02 var(--hue));
+	--text-muted: rgba(0, 0, 0, .5);
+
+	--status-success: oklch(.65 .20 150);
+	--status-error: oklch(.65 .20 25);
+	--status-warning: oklch(.70 .14 60);
+	--status-info: oklch(.66 .14 240);
+	--status-success-badge: var(--status-success);
+	--status-error-badge: var(--status-error);
+	--status-warning-badge: var(--status-warning);
+
+	--line-divider: oklch(.5 .01 var(--hue));
+	--line-color: rgba(0, 0, 0, .1);
+	--meta-divider: rgba(0, 0, 0, .2);
+	--skeleton-bg: oklch(.92 .01 var(--hue));
+	--skeleton-highlight: oklch(.96 .015 var(--hue));
+
+	--scrollbar-bg-light: rgba(0, 0, 0, .4);
+	--scrollbar-bg-hover-light: rgba(0, 0, 0, .5);
+	--scrollbar-bg-active-light: rgba(0, 0, 0, .6);
+	--scrollbar-bg-dark: rgba(255, 255, 255, .4);
+	--scrollbar-bg-hover-dark: rgba(255, 255, 255, .5);
+	--scrollbar-bg-active-dark: rgba(255, 255, 255, .6);
+	--scrollbar-bg: var(--scrollbar-bg-light);
+	--scrollbar-bg-hover: var(--scrollbar-bg-hover-light);
+	--scrollbar-bg-active: var(--scrollbar-bg-active-light);
+}
+
+@theme {
+	--font-sans: "Roboto", "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Noto Sans SC", "Noto Sans", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans SC", "WenQuanYi Micro Hei", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}

@@ -1,0 +1,22 @@
+---
+import StatusLayout from '@layouts/StatusLayout.astro';
+import { siteConfig } from '@config';
+---
+
+<StatusLayout active="404" title={`Not found · ${siteConfig.title}`} description="页面不存在">
+	<section class="flex w-full rounded-(--radius-large) overflow-hidden relative">
+		<div class="text-75 card-base z-10 px-6 md:px-9 py-12 md:py-16 relative w-full text-center">
+			<div class="mb-6">
+				<h1 class="text-8xl md:text-9xl font-bold mb-4">
+					404
+				</h1>
+				<h2 class="text-3xl md:text-4xl font-bold mb-4">
+					页面未找到
+				</h2>
+				<p class="text-lg mb-8 max-w-md mx-auto">
+					抱歉，您访问的页面不存在或已被移除。
+				</p>
+			</div>
+		</div>
+	</section>
+</StatusLayout>

@@ -1,0 +1,72 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import LightDarkSwitch from '@islands/LightDarkSwitch.svelte';
+import RefreshButton from '@islands/RefreshButton.svelte';
+import { navBarConfig, siteConfig } from '@config';
+
+interface Props {
+	title?: string;
+	description?: string;
+	active?: 'home' | 'monitors' | '404';
+}
+
+const { title, description, active = 'home' } = Astro.props;
+const year = new Date().getFullYear();
+const externalLinks = navBarConfig.links.filter((link) => link.url);
+// RC-Blog MainGridLayout uses absolute main at 5.5rem so content anchors under sticky navbar.
+const mainPanelTop = '5.5rem';
+---
+
+<BaseLayout title={title} description={description}>
+	<div class="page-shell relative min-h-screen">
+		<div id="top-row" class="max-page-width pointer-events-none relative z-50 mx-auto px-0 transition-all duration-700 md:px-4">
+			<div id="navbar-wrapper" class="pointer-events-auto sticky top-0 transition-all">
+				<div id="navbar" class="onload-animation">
+					<div class="absolute left-0 right-0 -top-8 h-8 bg-(--card-bg) transition" aria-hidden="true"></div>
+					<nav class="card-base card-shadow mx-auto flex h-[4.5rem] items-center justify-between overflow-visible! rounded-t-none! px-4" aria-label="Primary navigation">
+						<a class="btn-plain scale-animation h-[3.25rem] rounded-lg px-5 font-bold active:scale-95" href="/" aria-current={active === 'home' ? 'page' : undefined}>
+							<div class="text-md flex flex-row items-center text-(--primary)">
+								{/* material-symbols:home-outline-rounded (static SVG, zero client JS) */}
+								<svg class="mb-1 mr-2 h-7 w-7 shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+									<path d="M6 19h3v-5q0-.425.288-.712T10 13h4q.425 0 .713.288T15 14v5h3v-9l-6-4.5L6 10zm-2 0v-9q0-.475.213-.9t.587-.7l6-4.5q.525-.4 1.2-.4t1.2.4l6 4.5q.375.275.588.7T20 10v9q0 .825-.588 1.413T18 21h-4q-.425 0-.712-.288T13 20v-5h-2v5q0 .425-.288.713T10 21H6q-.825 0-1.412-.587T4 19m8-6.75"></path>
+								</svg>
+								{siteConfig.title}
+							</div>
+						</a>
+						<div class="hidden md:flex">
+							{externalLinks.map((link) => (
+								<a class="btn-plain scale-animation h-11 rounded-lg px-5 font-bold active:scale-95" href={link.url} target="_blank" rel="noopener noreferrer">
+									<div class="flex items-center">{link.name}</div>
+								</a>
+							))}
+						</div>
+						<div class="flex gap-1">
+							<RefreshButton client:only="svelte" />
+							<LightDarkSwitch client:only="svelte" />
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+
+		<div class="status-body pointer-events-none absolute inset-x-0 z-30 w-full" style={`top: ${mainPanelTop}`}>
+			<div class="pointer-events-auto relative mx-auto max-page-width px-0 md:px-4">
+				<main id="swup-container" class="transition-swup-fade status-main overflow-hidden">
+					<div id="content-wrapper" class="onload-animation">
+						<slot />
+					</div>
+				</main>
+				<footer class="footer onload-animation mb-4">
+					<div class="border-t border-dashed border-(--line-divider) px-6 py-5 text-center text-sm text-50">
+						<div>© {year} {siteConfig.author} All Rights Reserved.</div>
+						<div class="mt-1">Powered by <a class="link font-medium text-(--primary)" href="https://uptimerobot.com" target="_blank" rel="noopener noreferrer">UptimeRobot</a> & <a class="link font-medium text-(--primary)" href="https://github.com/Yamrc/Tokee" target="_blank" rel="noopener noreferrer">Tokee</a> · <span id="git-hash">unknown</span></div>
+					</div>
+				</footer>
+			</div>
+		</div>
+	</div>
+	<script>
+		const gitHash = document.getElementById('git-hash');
+		if (gitHash) gitHash.textContent = (window as Window & { _git_hash?: string })._git_hash ?? 'unknown';
+	</script>
+</BaseLayout>

@@ -1,0 +1,50 @@
+#page-scrollbar {
+	position: fixed;
+	inset-block: 0.2rem;
+	inset-inline-end: 0;
+	z-index: 9999;
+	width: 14px;
+	pointer-events: none;
+	opacity: 0;
+	transition:
+		opacity 180ms ease,
+		width 180ms ease;
+}
+
+html.scrollbar-interacting #page-scrollbar,
+#page-scrollbar:hover,
+#page-scrollbar.dragging {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+#page-scrollbar.hidden {
+	display: none;
+}
+
+#page-scrollbar-thumb {
+	position: absolute;
+	top: 0;
+	inset-inline-end: 4px;
+	width: 4px;
+	min-height: 3rem;
+	border-radius: 999px;
+	background-color: var(--scrollbar-bg);
+	transition:
+		background-color 180ms ease,
+		inset-inline-end 180ms ease,
+		width 180ms ease;
+	will-change: transform, height;
+}
+
+#page-scrollbar:hover #page-scrollbar-thumb,
+#page-scrollbar.dragging #page-scrollbar-thumb {
+	inset-inline-end: 3px;
+	width: 8px;
+	background-color: var(--scrollbar-bg-hover);
+}
+
+#page-scrollbar.dragging #page-scrollbar-thumb,
+#page-scrollbar-thumb:active {
+	background-color: var(--scrollbar-bg-active);
+}

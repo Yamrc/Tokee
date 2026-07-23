@@ -1,4 +1,5 @@
 dist
+.astro/
 .wrangler
 .output
 .vercel

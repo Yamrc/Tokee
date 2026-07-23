@@ -1,0 +1,9 @@
+---
+import StatusLayout from '@layouts/StatusLayout.astro';
+import { siteConfig } from '@config';
+import MonitorListIsland from '@islands/MonitorListIsland.svelte';
+---
+
+<StatusLayout active="home" title={siteConfig.title} description={siteConfig.description}>
+	<MonitorListIsland client:only="svelte" />
+</StatusLayout>

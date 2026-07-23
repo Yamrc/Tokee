@@ -1,43 +1,41 @@
 {
+	"extends": "astro/tsconfigs/strict",
 	"compilerOptions": {
-		"jsx": "preserve",
-		"jsxImportSource": "solid-js",
-		"target": "ESNext",
-		"allowSyntheticDefaultImports": true,
-		"declaration": true,
-		"esModuleInterop": true,
-		"isolatedModules": true,
-		"module": "ESNext",
-		"moduleResolution": "bundler",
-		"noEmit": true,
-		"strict": true,
 		"types": [
+			"astro/client",
 			"vite/client"
 		],
-		"baseUrl": ".",
 		"paths": {
 			"@/*": [
-				"src/*"
+				"./src/*"
 			],
-			"@features/*": [
-				"src/features/*"
+			"@config": [
+				"./src/config.ts"
 			],
-			"@shared/*": [
-				"src/shared/*"
+			"@layouts/*": [
+				"./src/layouts/*"
 			],
-			"@services/*": [
-				"src/services/*"
+			"@islands/*": [
+				"./src/islands/*"
 			],
-			"@hooks/*": [
-				"src/hooks/*"
+			"@lib/*": [
+				"./src/lib/*"
 			],
-			"@components/*": [
-				"src/components/*"
+			"@scripts/*": [
+				"./src/scripts/*"
+			],
+			"@styles/*": [
+				"./src/styles/*"
 			]
 		}
 	},
 	"include": [
+		".astro/types.d.ts",
 		"src/**/*",
-		"src/**/*.d.ts"
+		"astro.config.mjs"
+	],
+	"exclude": [
+		"dist",
+		"node_modules"
 	]
 }

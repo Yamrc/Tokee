@@ -1,0 +1,63 @@
+@keyframes skeleton {
+	0% {
+		background-position: 200% 0;
+	}
+	100% {
+		background-position: -200% 0;
+	}
+}
+
+.skeleton {
+	background: linear-gradient(90deg, var(--skeleton-bg) 0%, var(--skeleton-highlight) 50%, var(--skeleton-bg) 100%);
+	background-size: 200% 100%;
+	animation: skeleton 1.5s ease-in-out infinite;
+}
+
+html.is-changing .transition-swup-fade {
+	transition:
+		opacity var(--duration-regular) var(--ease-standard),
+		transform var(--duration-regular) var(--ease-standard);
+}
+
+html.is-animating .transition-swup-fade {
+	opacity: 0;
+	transform: translateY(1rem);
+}
+
+@keyframes fade-in-up {
+	0% {
+		opacity: 0;
+		transform: translateY(2rem);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.onload-animation {
+	opacity: 1;
+}
+
+:root.initial-load .onload-animation {
+	opacity: 0;
+	animation: 300ms fade-in-up;
+	animation-fill-mode: forwards;
+}
+
+#navbar {
+	animation-delay: 0ms;
+}
+
+#swup-container {
+	outline: none;
+}
+
+#content-wrapper {
+	animation-delay: var(--content-delay);
+}
+
+.footer {
+	animation-delay: 250ms;
+}

@@ -1,0 +1,28 @@
+html {
+	background: var(--page-bg);
+	color-scheme: light;
+	font-size: 14px;
+	scrollbar-width: none;
+}
+
+html.dark {
+	color-scheme: dark;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+	display: none;
+}
+
+body {
+	min-height: 100vh;
+	margin: 0;
+	background: var(--page-bg);
+	color: var(--text-primary);
+}
+
+@media (min-width: 48rem) {
+	html {
+		font-size: 16px;
+	}
+}

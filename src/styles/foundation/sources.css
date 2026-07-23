@@ -1,0 +1,10 @@
+/* Ensure Tailwind scans Astro/Svelte markup for utilities like active:scale-*. */
+@source "../../**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx}";
+
+::selection {
+	background-color: oklch(.90 .05 var(--hue));
+}
+
+:root.dark::selection {
+	background-color: oklch(.40 .08 var(--hue));
+}

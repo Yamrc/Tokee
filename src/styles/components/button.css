@@ -1,0 +1,149 @@
+.btn-card,
+.btn-regular,
+.btn-plain {
+	/* Block-level flex matches RC-Blog and avoids baseline strut when wrapped in relative dropdown shells. */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	/* RC-Blog: Tailwind `transition` timing; include CSS `scale` used by active:scale-*. */
+	transition-property: color, background-color, background, transform, scale, opacity;
+	transition-duration: 150ms;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/*
+ * RC-Blog / Tailwind v4 press scales — use CSS `scale` (not transform:scale)
+ * so magnitude and composition match RC-Blog 1:1.
+ */
+.active\:scale-95:active {
+	--tw-scale-x: 95%;
+	--tw-scale-y: 95%;
+	--tw-scale-z: 95%;
+	scale: var(--tw-scale-x) var(--tw-scale-y);
+}
+
+.active\:scale-90:active {
+	--tw-scale-x: 90%;
+	--tw-scale-y: 90%;
+	--tw-scale-z: 90%;
+	scale: var(--tw-scale-x) var(--tw-scale-y);
+}
+
+.btn-card {
+	background: var(--card-bg);
+}
+
+.btn-card:hover {
+	background: var(--btn-card-bg-hover);
+}
+
+.btn-card:active {
+	background: var(--btn-card-bg-active);
+}
+
+.btn-regular {
+	background: var(--btn-regular-bg);
+	color: var(--btn-content);
+}
+
+.btn-regular:hover {
+	background: var(--btn-regular-bg-hover);
+}
+
+.btn-regular:active {
+	background: var(--btn-regular-bg-active);
+}
+
+.btn-plain {
+	position: relative;
+	z-index: 0;
+	background: transparent;
+	color: rgb(0 0 0 / 75%);
+}
+
+:root.dark .btn-plain {
+	color: rgb(255 255 255 / 75%);
+}
+
+.btn-plain:hover {
+	color: var(--primary);
+}
+
+.btn-plain:not(.scale-animation):hover {
+	background: var(--btn-plain-bg-hover);
+}
+
+.btn-plain:not(.scale-animation):active {
+	background: var(--btn-plain-bg-active);
+}
+
+/* RC-Blog expand-animation: surface lives on ::before; host uses active:bg-none. */
+.scale-animation,
+.expand-animation {
+	position: relative;
+	z-index: 0;
+}
+
+.scale-animation:active,
+.expand-animation:active {
+	background: none;
+}
+
+.scale-animation::before,
+.expand-animation::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	border-radius: inherit;
+	background: transparent;
+	transform: scale(0.85);
+	transition-property: background-color, background, transform, opacity;
+	transition-duration: 150ms;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scale-animation:hover::before,
+.expand-animation:hover::before {
+	background: var(--btn-plain-bg-hover);
+	transform: scale(1);
+}
+
+.scale-animation:active::before,
+.expand-animation:active::before {
+	background: var(--btn-plain-bg-active);
+}
+
+.btn-plain.scale-animation.current-theme-btn {
+	color: var(--primary);
+}
+
+.btn-plain.scale-animation.current-theme-btn::before {
+	background: var(--btn-plain-bg-hover);
+	transform: scale(1);
+	opacity: 1;
+}
+
+.float-panel {
+	transition:
+		opacity var(--duration-regular) var(--ease-standard),
+		transform var(--duration-regular) var(--ease-standard);
+}
+
+.float-panel-inner {
+	overflow: hidden;
+	border-radius: var(--radius-large);
+	background: var(--float-panel-bg);
+	box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.08), 0 8px 10px -6px rgb(0 0 0 / 0.06);
+}
+
+:root.dark .float-panel-inner {
+	box-shadow: none;
+}
+
+.float-panel-closed {
+	pointer-events: none;
+	opacity: 0;
+	transform: translateY(-0.25rem);
+}

@@ -1,0 +1,13 @@
+.card-base {
+	overflow: hidden;
+	border-radius: var(--radius-large);
+	background: var(--card-bg);
+	transition:
+		background var(--duration-regular) var(--ease-standard),
+		box-shadow var(--duration-regular) var(--ease-standard),
+		filter var(--duration-regular) var(--ease-standard);
+}
+
+.card-shadow {
+	filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.005));
+}
