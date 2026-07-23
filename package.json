@@ -26,6 +26,6 @@
 		"typescript": "^5.9.3"
 	},
 	"dependencies": {
-		"@fontsource/roboto": "^5.2.9"
+		"@fontsource/roboto": "^5.3.0"
 	}
 }
