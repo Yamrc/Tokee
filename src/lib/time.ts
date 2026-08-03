@@ -22,3 +22,17 @@ export function formatRelativeTime(dateString: string): string {
 		return dateString;
 	}
 }
+
+export function formatLocalDatetime(dateString: string, locale?: string): string {
+	try {
+		return new Intl.DateTimeFormat(locale, {
+			year: 'numeric',
+			month: 'short',
+			day: 'numeric',
+			hour: '2-digit',
+			minute: '2-digit',
+		}).format(new Date(dateString));
+	} catch {
+		return dateString;
+	}
+}

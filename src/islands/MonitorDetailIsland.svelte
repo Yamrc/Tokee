@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import Icon from '@iconify/svelte';
+	import ResponseTimeChart from '@/components/ResponseTimeChart.svelte';
 	import { siteConfig } from '@config';
 	import { clearCacheForRefresh, getMonitorDetail } from '@lib/uptime-robot';
 	import { formatRatio, formatTime } from '@lib/format';
@@ -130,6 +131,10 @@
 				</div>
 			</section>
 		</div>
+		<section class="card-base card-shadow p-5">
+			<div class="skeleton mb-4 h-6 w-32 rounded-md"></div>
+			<div class="skeleton h-[17.5rem] rounded-lg"></div>
+		</section>
 		<section class="card-base card-shadow p-5">
 			<div class="skeleton mb-4 h-6 w-28 rounded-md"></div>
 			<div class="space-y-3">
@@ -274,6 +279,14 @@
 				</div>
 			</section>
 		</div>
+
+		<section class="card-base card-shadow p-5">
+			<div class="mb-4 flex items-center gap-2.5">
+				<Icon icon="material-symbols:show-chart" class="text-(--primary) text-[1.5rem]" aria-hidden="true" />
+				<h3 class="text-90 text-lg font-semibold">响应时间趋势</h3>
+			</div>
+			<ResponseTimeChart responseTimes={monitor.responseTimes ?? []} />
+		</section>
 
 		<section class="card-base card-shadow p-5">
 			<div class="mb-4 flex items-center gap-2.5">
