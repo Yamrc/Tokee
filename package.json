@@ -19,8 +19,8 @@
 		"@iconify/svelte": "^5.2.2",
 		"@swup/astro": "^1.8.0",
 		"@tailwindcss/vite": "^4.3.3",
-		"@types/node": "^24.13.4",
-		"astro": "^7.3.2",
+		"@types/node": "^24.13.5",
+		"astro": "^7.3.3",
 		"svelte": "^5.57.0",
 		"tailwindcss": "^4.3.3",
 		"typescript": "^5.9.3"
