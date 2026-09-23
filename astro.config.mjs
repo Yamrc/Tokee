@@ -1,10 +1,7 @@
-import { fileURLToPath } from "node:url";
 import svelte from "@astrojs/svelte";
 import swup from "@swup/astro";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
-
-const src = (path) => fileURLToPath(new URL(`./src/${path}`, import.meta.url));
 
 export default defineConfig({
 	integrations: [
@@ -43,13 +40,13 @@ export default defineConfig({
 		plugins: [tailwindcss()],
 		resolve: {
 			alias: {
-				"@": src(""),
-				"@config": src("config.ts"),
-				"@layouts": src("layouts"),
-				"@islands": src("islands"),
-				"@lib": src("lib"),
-				"@scripts": src("scripts"),
-				"@styles": src("styles"),
+				"@": "/src",
+				"@config": "/src/config.ts",
+				"@layouts": "/src/layouts",
+				"@islands": "/src/islands",
+				"@lib": "/src/lib",
+				"@scripts": "/src/scripts",
+				"@styles": "/src/styles",
 			},
 		},
 	},
