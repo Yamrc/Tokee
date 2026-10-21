@@ -15,11 +15,11 @@
 	},
 	"devDependencies": {
 		"@astrojs/check": "^0.9.10",
-		"@astrojs/svelte": "^9.0.1",
+		"@astrojs/svelte": "^9.1.0",
 		"@iconify/svelte": "^5.2.2",
 		"@swup/astro": "^1.8.0",
 		"@tailwindcss/vite": "^4.3.3",
-		"astro": "^7.3.5",
+		"astro": "^7.4.0",
 		"svelte": "^5.57.2",
 		"tailwindcss": "^4.3.3",
 		"typescript": "^5.9.3"
